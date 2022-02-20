@@ -25,7 +25,12 @@ module.exports = {
 
       },
       colors: {
-      "light-white": '#F7F8FD'
+        "light-white": '#F7F8FD',
+        "f-purple": '#AD1FEA',
+        "f-light-blue": '#4661E6',
+        "f-dark-blue" : "#647196",
+        "f-dark-blue-200" :"#3A4374",
+        'f-dark-blue-300':'#373F68'
       }
     },
   },

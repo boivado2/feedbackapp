@@ -1,4 +1,5 @@
 import React from 'react'
+import BoxWidget from './resuable/BoxWidget'
 
 function SideBar({ mobileSidebar }) {
   console.log(mobileSidebar)
@@ -15,12 +16,13 @@ function SideBar({ mobileSidebar }) {
         <span className='p-2 text-sm bg-light-white  rounded-lg w-fit h-fit'>Enhancement</span>
         <span className='p-2 text-sm bg-light-white  rounded-lg w-fit h-fit'>Bug</span>
         <span className='p-2 text-sm bg-light-white  rounded-lg w-fit h-fit'>Feature</span>
+        <BoxWidget title={'Me'} iconName={'arrowUp'} flex_dir="row" />
 
 
  </div>
       <div className="flex justify-center flex-col border w-48
         bg-white rounded-lg sm:w-full p-3">
-        <div className=" flex justify-between  mb-3">
+        <div className=" flex justify-between mt-3 mb-3">
           <h4 className='mr-4'>Roadmap</h4>
           <a href="#">Views</a>
         </div>

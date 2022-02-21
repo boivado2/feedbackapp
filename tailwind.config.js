@@ -26,6 +26,7 @@ module.exports = {
       },
       colors: {
         "light-white": '#F7F8FD',
+        "light-white-100": "#F2F4FF",
         "f-purple": '#AD1FEA',
         "f-light-blue": '#4661E6',
         "f-dark-blue" : "#647196",

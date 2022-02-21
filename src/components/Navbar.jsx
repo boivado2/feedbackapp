@@ -2,7 +2,6 @@ import React from 'react'
 
 function Navbar({hideSidebar, showSidebar, mobileSidebar}) {
 
-console.log(mobileSidebar)
   const onHideSidebar = (e) => {
     e.preventDefault()
     hideSidebar()

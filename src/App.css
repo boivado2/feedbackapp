@@ -5,6 +5,7 @@
 
 body {
   background-color: #F2F4FF;
+  overflow-x: hidden;
 }
 
 .bg-radial {

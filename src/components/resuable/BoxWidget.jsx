@@ -1,10 +1,10 @@
 import React from 'react'
 
-function BoxWidget({title,icon, iconName, flex_dir}) {
+function BoxWidget({title,icon, iconName, flex_dir, onClick}) {
   return (
-    <div className={`flex rounded-lg flex-${flex_dir} p-2 text-sm bg-light-white h-fit w-fit`}>
+    <div onClick={onClick} className={`flex rounded-lg flex-${flex_dir} py-1 px-4 text-sm bg-light-white h-fit w-fit hover:bg-light-white-100 cursor-pointer`}>
             <img className='h-4 w-full ' src={icon} alt={iconName} />
-      <p>{title}</p>
+      <p className='lg:text-sm'>{title}</p>
     </div>
   )
 }

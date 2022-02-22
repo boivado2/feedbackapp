@@ -3,16 +3,16 @@ import BoxWidget from './resuable/BoxWidget'
 
 
 function FeedCategory() {
-  const categories = [
+  const items = [
     { name: "All"},{name: "Ux" }, {name: "Ui"}, {name: "Feature" } , {name: "Bug" }, {name: "Enhancement" }
   ]
 
-  const onSelectCategory = (category) => {
+  const onItemSelect = (category) => {
     console.log(category.toLowerCase())
   }
   return (
     <div className='flex  gap-2 lg:gap-3 flex-wrap  items-center justify-start  p-4 lg:text-xl'>
-      {categories.map(category => <BoxWidget onClick={() => onSelectCategory(category.name)} key={category.name} title={category.name} flex_dir='row'/>)}
+      {items.map(item => <BoxWidget onClick={() => onItemSelect(item.name)} key={item.name} title={item.name} flex_dir='row'/>)}
 
     </div>
   )

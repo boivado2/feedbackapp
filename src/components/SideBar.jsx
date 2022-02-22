@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FeedCategory from './FeedCategory'
 
 function SideBar({ mobileSidebar }) {
+
+  const [currentCategory, setCurentCategory] = useState('')
+
+  const categories = [
+    { name: "All"},{name: "Ux" }, {name: "Ui"}, {name: "Feature" } , {name: "Bug" }, {name: "Enhancement" }
+  ]
+
+  const onCategorySelect = (item) => {
+    setCurentCategory(item.toLowerCase())
+  }
   return (
     <div className={` absolute  flex sm:transform-none sm:static right-0 sm:left-0  flex-col sm:flex-row md:flex-col gap-4 sm:gap-2 p-9 h-full rounded-sm sm:p-0 bg-light-white sm:bg-inherit sm:w-full  md:flex-2  ${!mobileSidebar  ? 'translate-x-72' : 'transform-none'} transition-all ease-linear delay-75 z-20`}> 
       <div className="hidden bg-radial text-white  rounded-lg sm:flex flex-col  sm:w-full bg-white  items-start justify-end p-4 text-clip ">
@@ -9,7 +19,7 @@ function SideBar({ mobileSidebar }) {
         <h2 className='text-xs'>Feedback Board</h2>
  </div>
       <div className="w-48 bg-white sm:w-full rounded-lg ">
-        <FeedCategory/>
+        <FeedCategory onItemSelect={onCategorySelect} selectedItem={currentCategory} items={ categories}/>
  </div>
       <div className="flex justify-center flex-col  w-48
         bg-white rounded-lg sm:w-full p-3">

@@ -26,7 +26,6 @@ function App() {
         <main className={`md:flex-3 flex flex-col gap-4 sm:filter-none ${mobileSidebar ? 'brightness-50 blur-sm' :''}`}>
           <Header/>
           <FeedPosts/>
-
           </main>
       </div>
  

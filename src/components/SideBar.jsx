@@ -3,7 +3,7 @@ import FeedCategory from './FeedCategory'
 
 function SideBar({ mobileSidebar }) {
 
-  const [currentCategory, setCurentCategory] = useState('')
+  const [currentCategory, setCurentCategory] = useState('all')
 
   const categories = [
     { name: "All"},{name: "Ux" }, {name: "Ui"}, {name: "Feature" } , {name: "Bug" }, {name: "Enhancement" }

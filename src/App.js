@@ -19,7 +19,7 @@ function App() {
   }
  
   return (
-    <div className="font-jost text-sm overflow-x-hidden">
+    <div className={`font-jost text-sm overflow-x-hidden ${mobileSidebar ? 'overflow-y-hidden h-screen sm:overflow-y-scroll sm:h-full' : ''}`}>
       <Navbar hideSidebar={hideSidebar} showSidebar={showSidebar} mobileSidebar={mobileSidebar}/>
       <div className={` lg:container mx-auto sm:p-9  flex  flex-col md:flex-row sm:gap-3  `}>
           <SideBar  mobileSidebar={mobileSidebar} />

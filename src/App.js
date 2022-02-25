@@ -14,7 +14,7 @@ function App() {
 
 
   const handleSelectedCategory = (item) => {
-    setSeletedCategory(item.toLowerCase())
+    setSeletedCategory(item)
   }
 
   const hideSidebar = () => {
@@ -31,7 +31,7 @@ function App() {
           <SideBar onSelectedCategory={handleSelectedCategory} selectedCategory={selectedCategory}  mobileSidebar={mobileSidebar} />
         <main className={`md:flex-3 flex flex-col gap-4 sm:filter-none ${mobileSidebar ? 'brightness-50 blur-sm' :''}`}>
           <Header/>
-          <FeedPosts/>
+          <FeedPosts selectedCategory={selectedCategory}/>
           </main>
       </div>
  

@@ -11,7 +11,12 @@ function App() {
 
   const [mobileSidebar, setMobileSidebar] = useState(false)
   const [selectedCategory, setSeletedCategory] = useState('all')
+  const [selectedMenuItem, setMenuItem] = useState({ title: "Most Upvotes", id: 1, path: 'upvotes', order: "desc" })
 
+
+  const onHandleMenu = (menuItem) =>{
+    setMenuItem(menuItem)
+  }
 
   const handleSelectedCategory = (item) => {
     setSeletedCategory(item)
@@ -31,8 +36,8 @@ function App() {
       <div className={` lg:container mx-auto sm:p-9  flex  flex-col md:flex-row sm:gap-3  `}>
           <SideBar onSelectedCategory={handleSelectedCategory} selectedCategory={selectedCategory}  mobileSidebar={mobileSidebar} />
         <main className={`md:flex-3 flex flex-col gap-4 sm:filter-none ${mobileSidebar ? 'brightness-50 blur-sm' :''}`}>
-          <Header/>
-          <FeedPosts selectedCategory={selectedCategory}/>
+          <Header onHandleMenu={onHandleMenu} selectedMenuItem={selectedMenuItem}/>
+          <FeedPosts selectedCategory={selectedCategory} selectedMenuItem={selectedMenuItem}/>
           </main>
       </div>
  

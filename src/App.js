@@ -1,10 +1,10 @@
+import { useState } from 'react/cjs/react.development';
 import SideBar from './components/SideBar'
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import FeedPosts from './components/FeedPosts';
 
 import './App.css';
-import { useState } from 'react/cjs/react.development';
 
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 
   const handleSelectedCategory = (item) => {
     setSeletedCategory(item)
+    setMobileSidebar(false)
   }
 
   const hideSidebar = () => {

@@ -12,10 +12,6 @@ function SideBar({ mobileSidebar, selectedCategory, onSelectedCategory  }) {
     setCategories(categories)
   }, [])
   
-  // const categories = [
-  //   { name: "All"},{name: "Ux" }, {name: "Ui"}, {name: "Feature" } , {name: "Bug" }, {name: "Enhancement" }
-  // ]
-
   const handleCategorySelect = (category) => {
     onSelectedCategory(category)
   }

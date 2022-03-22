@@ -4,22 +4,22 @@ import feedbackContext from '../context/feeds/feedbackContext'
 import FeedPost from './FeedPost'
 import NoFeedback from './NoFeedback';
 
-function FeedPosts({selectedCategory, selectedMenuItem}) {
-  const { getFeedback, feedbacks } = useContext(feedbackContext)
+
+function FeedPosts({selectedCategory}) {
+  const { getFeedback, feedbacks, menuItem } = useContext(feedbackContext)
   useEffect(() => {
     getFeedback()
   }, [])
 
 
+  const filtered = selectedCategory && selectedCategory.id ? feedbacks.filter(feedback => feedback.category.title === selectedCategory.name.toLowerCase()) : feedbacks
 
-  const filtered = selectedCategory && selectedCategory.id ? feedbacks.filter(feedback => feedback.category === selectedCategory.name.toLowerCase()) : feedbacks
-
-  const sorted = _.orderBy(filtered, [selectedMenuItem.path], [selectedMenuItem.order])
+  const sorted = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
 
  if (sorted.length === 0) return <NoFeedback/>  
   return (
     <div className='p-3 flex flex-col gap-2 sm:p-0'>
-     {sorted.map(feedback => <FeedPost key={feedback.id} feedback={feedback}/>)}
+     {sorted.map(feedback => <FeedPost key={feedback._id} feedback={feedback}/>)}
     </div>
   )
 }

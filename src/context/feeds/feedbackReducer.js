@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { feedbackReceived } from './../types';
+import { feedbackReceived, SET_MENU_ITEM } from './../types';
 
 
 export default (state, action) => {
@@ -8,6 +8,11 @@ export default (state, action) => {
       return {
         ...state,
         feedbacks: action.payload
+      }
+    case SET_MENU_ITEM:
+      return {
+        ...state,
+        menuItem: action.payload
       }
         
     default:

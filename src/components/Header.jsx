@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import DropMenu from './DropMenu';
+import {Link} from 'react-router-dom';
 
 function Header({onHandleMenu, selectedMenuItem}) {
 
@@ -25,7 +26,7 @@ function Header({onHandleMenu, selectedMenuItem}) {
       <p className='hidden sm:flex'>Suggestion</p>
       <DropMenu onHideMenu={onHideMenu} OnShowMenu={OnShowMenu} onMenuSelect={onMenuSelect} menu={menu} selectedMenuItem={selectedMenuItem} />
    </div>
-      <button className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple'>+ Add Feedback</button>
+      <Link to='newfeed' className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple'>+ Add Feedback</Link>
     </div>
   )
 }

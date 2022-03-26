@@ -4,18 +4,11 @@ import Home from './components/Home';
 import FeedbackForm from './components/FeedbackForm';
 import FeedbackDetail from './components/FeedbackDetail';
 import LoginForm from './components/LoginForm';
-import AuthContext from './context/auth/authContext';
 import './App.css';
 
 
 
 function App() {
-  const {getUser} = useContext(AuthContext)
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    getUser(token)
-  })
-
   return (
     <Routes>
       <Route path='/suggestions' element={<Home />} />

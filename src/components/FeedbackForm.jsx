@@ -59,7 +59,7 @@ function FeedbackForm() {
           <span className='text-sm my-2'>Choose a category for your feedback</span>
           <select value={categoryId} onChange={onHandleChange} name='categoryId' className='py-2 rounded-lg px-8 bg-light-white-100 outline-none' >
           {categories.map(category => (
-          <option key={category._id} value={category._id}>{category.title}</option>
+          <option selected key={category._id} value={category._id}>{category.title}</option>
         ))}
           </select>
         </div>

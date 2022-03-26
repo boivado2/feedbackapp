@@ -4,13 +4,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import FeedbackState from './context/feeds/feedbackState';
 import {BrowserRouter as Router} from 'react-router-dom'
-
+import AuthState from './context/auth/authState';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <FeedbackState>
-        <App />
-      </FeedbackState>
+      <AuthState>
+        <FeedbackState>
+          <App />
+        </FeedbackState>
+        </AuthState>
      </Router>
   </React.StrictMode>,
   document.getElementById('root')

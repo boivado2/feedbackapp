@@ -1,7 +1,16 @@
-import React, {useState} from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useContext, useEffect} from 'react'
 import { Link,useNavigate  } from 'react-router-dom';
+import FeedbackContext from './../context/feeds/feedbackContext';
 
 function FeedbackForm() {
+
+  const { addFeedback, getCategories, categories } = useContext(FeedbackContext)
+  
+  useEffect(() => {
+    getCategories()
+  },[])
+  
 
   const navigate = useNavigate()
   const [feedback, setFeedback] = useState({
@@ -9,6 +18,17 @@ function FeedbackForm() {
     categoryId: "",
     description: ""
   })
+
+
+  const onHandleForm = (e) => {
+    e.preventDefault()
+    addFeedback(feedback)
+    navigate('/')
+  }
+
+  const onHandleChange  = (e) => {
+  setFeedback({...feedback, [e.target.name]: e.target.value})
+  }
 
   const onHandleCancel = () => {
     navigate('/')
@@ -19,14 +39,6 @@ function FeedbackForm() {
         description: ""
       }
     )
-  }
-  const onHandleForm = (e) => {
-    e.preventDefault()
-     console.log(feedback)
-  }
-
-  const onHandleChange  = (e) => {
-  setFeedback({...feedback, [e.target.name]: e.target.value})
   }
   const {title, categoryId, description} = feedback
   return (
@@ -41,15 +53,14 @@ function FeedbackForm() {
           <input onChange={onHandleChange} name="title" value={title} className='py-2 rounded-lg px-8  bg-light-white-100 outline-none' type="text"/>
         </div>
 
+
         <div className='flex flex-col'>
           <h4 className='text-lg'>Category</h4>
           <span className='text-sm my-2'>Choose a category for your feedback</span>
           <select value={categoryId} onChange={onHandleChange} name='categoryId' className='py-2 rounded-lg px-8 bg-light-white-100 outline-none' >
-            <option value="1">Ux</option>
-            <option value="2">Ui</option>
-            <option value="3">Enhancement</option>
-            <option value="4">Feature</option>
-
+          {categories.map(category => (
+          <option key={category._id} value={category._id}>{category.title}</option>
+        ))}
           </select>
         </div>
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react'
 import _ from 'lodash'
 import feedbackContext from '../context/feeds/feedbackContext'
@@ -5,16 +6,17 @@ import FeedPost from './FeedPost'
 import NoFeedback from './NoFeedback';
 
 
-function FeedPosts({selectedCategory}) {
-  const { getFeedback, feedbacks, menuItem } = useContext(feedbackContext)
+function FeedPosts() {
+  const { getFeedbacks, feedbacks, menuItem, selectedCategory } = useContext(feedbackContext)
   useEffect(() => {
-    getFeedback()
+    getFeedbacks()
   }, [])
 
 
-  const filtered = selectedCategory && selectedCategory.id ? feedbacks.filter(feedback => feedback.category.title === selectedCategory.name.toLowerCase()) : feedbacks
+  const filtered = selectedCategory && selectedCategory._id ? feedbacks.filter(feedback => feedback.category._id === selectedCategory._id) : feedbacks
 
   const sorted = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
+
 
  if (sorted.length === 0) return <NoFeedback/>  
   return (

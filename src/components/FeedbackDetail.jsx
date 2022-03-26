@@ -16,6 +16,7 @@ function FeedbackDetail() {
     userId: user._id
   })
 
+  
   useEffect(() => {
     getFeedback(suggestionId)
     getComments(suggestionId)

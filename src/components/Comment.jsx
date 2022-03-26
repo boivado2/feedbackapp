@@ -12,8 +12,8 @@ function Comment({ comment }) {
   const { addReply, getReplies, replies } = useContext(FeedbackContext)
 
   useEffect(() => {
-    getReplies(comment._id)
-  },[comment._id, replies])
+    // getReplies(comment._id)
+  },[replies])
 
 
   const [reply, setReply] = useState({
@@ -43,7 +43,7 @@ function Comment({ comment }) {
   }
   return (
     <div className=''>
-      <div className='w-full flex flex-col'>
+      <div className='w-full flex flex-col p-3 sm:p-7'>
       <img className=' w-14 h-14 object-contain rounded-full' src={comment.user.image_url} alt="image_url" />
           <div className='flex justify-between'>
             <div >
@@ -59,7 +59,7 @@ function Comment({ comment }) {
           )}
           </div>
 
-        <p className='mt-3'>{comment.content}</p>
+        <p className='mt-3 '>{comment.content}</p>
         {form ? (
             <form onSubmit={handleFormSubmit} className='flex gap-2 my-4' >
             <textarea onChange={handleInputChange}  placeholder='Type Your comment here' name="content"  className='py-4 px-5 bg-light-white-100 w-full flex-5 lg:flex-3' value={reply.content} ></textarea>
@@ -68,7 +68,7 @@ function Comment({ comment }) {
           ) : ''}
 
       </div>
-      <div className=' mt-4 px-9'>
+      <div className=' mt-4 px-8 sm:px-16'>
       {
         comment.replies.map(reply => (
           <Reply key={reply._id} reply ={reply}/>

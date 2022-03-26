@@ -2,7 +2,7 @@ import React from 'react'
 
 function Reply({reply}) {
   return (
-    <div className='w-full flex flex-col mt-3'>
+    <div className='w-full flex flex-col sm:p-4 mt-3'>
     <img className=' w-10 h-10 object-contain rounded-full' src={reply.user.image_url} alt="image_url" />
         <div className='flex justify-between'>
           <div >

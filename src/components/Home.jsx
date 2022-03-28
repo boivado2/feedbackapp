@@ -4,15 +4,9 @@ import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import FeedPosts from '../components/FeedPosts';
 import { Link } from 'react-router-dom';
-import AuthContext from '../context/auth/authContext';
 
 function Home() {
-  const {getUser} = useContext(AuthContext)
 
-    useEffect(() => {
-    const token = localStorage.getItem('token')
-    getUser(token)
-  })
 
   const [mobileSidebar, setMobileSidebar] = useState(false)
 

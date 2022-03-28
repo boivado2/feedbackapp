@@ -10,7 +10,7 @@ function FeedPosts() {
   const { getFeedbacks, feedbacks, menuItem, selectedCategory } = useContext(feedbackContext)
   useEffect(() => {
     getFeedbacks()
-  }, [feedbacks])
+  }, [])
 
 
   const filtered = selectedCategory && selectedCategory._id ? feedbacks.filter(feedback => feedback.category._id === selectedCategory._id) : feedbacks

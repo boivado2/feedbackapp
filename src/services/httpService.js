@@ -6,7 +6,6 @@ axios.interceptors.response.use(null, error => {
 
   if (!expectdError) {
     console.log("error", error)
-    alert("upexpected error")
   }
 
  return Promise.reject(error)

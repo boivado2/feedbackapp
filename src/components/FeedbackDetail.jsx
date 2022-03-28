@@ -9,23 +9,24 @@ import AuthContext from './../context/auth/authContext';
 function FeedbackDetail() {
   const { user } = useContext(AuthContext)
   const { getFeedback, feedback, addComment, getComments, comments } = useContext(FeedbackContext)
-  const { suggestionId } = useParams()
+  const { id } = useParams()
   
   const [comment, setComment] = useState({
     content: "",
     userId: user._id
   })
 
-  
+
   useEffect(() => {
-    getFeedback(suggestionId)
-    getComments(suggestionId)
-  },[suggestionId, comments])
+    getFeedback(id)
+    getComments(id)
+    console.log('me')
+  },[comments.length])
   
   const onFormSubmit = (e) => {
     e.preventDefault()
-    addComment(comment, suggestionId)
-    setComment({content: '', userId: ""})
+    addComment(comment, id)
+    setComment({content: '', userId: user._id})
   }
 
   const onFormInput = (e) => {
@@ -38,7 +39,7 @@ function FeedbackDetail() {
     <div className='lg:container mx-auto px-6 py-10 md:px-24 md:py-10 flex  flex-col  gap-3'>
       <div className='flex justify-between items-center'>
       <Link className='' to="/">go back</Link>
-      <button  className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-light-blue'>Edit Feedback</button>
+      <Link to={`/feedback/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-light-blue'>Edit Feedback</Link>
       </div>
       <FeedPost feedback={feedback} />
       <Comments comments={comments}/>

@@ -1,37 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useContext, useEffect} from 'react'
-import Reply from './Reply';
-import AuthContext from './../context/auth/authContext';
-import FeedbackContext from './../context/feeds/feedbackContext';
+import React, {useState} from 'react'
 
 
 
 function Comment({ comment }) {
 
-  const { user } = useContext(AuthContext)
-  const { addReply, getReplies, replies } = useContext(FeedbackContext)
-
-  useEffect(() => {
-    // getReplies(comment._id)
-  },[replies])
-
-
-  const [reply, setReply] = useState({
-    content: "",
-    userId: user._id
-  })
   const [form, setForm] = useState(false)
 
   const handleFormSubmit = (e) => {
-    e.preventDefault()
-    addReply(reply, comment._id)
-    setReply({ content: '', userId: "" })
-    setForm(false)
+
     
   }
 
   const handleInputChange = (e) => {
-    setReply({...reply, content: e.target.value})
   }
 
   const handleShowForm = () => {
@@ -62,19 +43,12 @@ function Comment({ comment }) {
         <p className='mt-3 '>{comment.content}</p>
         {form ? (
             <form onSubmit={handleFormSubmit} className='flex gap-2 my-4' >
-            <textarea onChange={handleInputChange}  placeholder='Type Your comment here' name="content"  className='py-4 px-5 bg-light-white-100 w-full flex-5 lg:flex-3' value={reply.content} ></textarea>
+            <textarea onChange={handleInputChange}  placeholder='Type Your comment here' name="content"  className='py-4 px-5 bg-light-white-100 w-full flex-5 lg:flex-3' ></textarea>
             <button  className='border-none h-fit  py-2 lg:px-1  text-xs lg:text-sm text-white rounded-md bg-f-purple flex-2 lg:flex-4'>Post Reply</button>
           </form>
           ) : ''}
 
       </div>
-      <div className=' mt-4 px-8 sm:px-16'>
-      {
-        comment.replies.map(reply => (
-          <Reply key={reply._id} reply ={reply}/>
-        ))
-     }
-</div>
       </div>
   )
 }

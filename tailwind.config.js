@@ -32,7 +32,9 @@ module.exports = {
         "f-light-blue": '#4661E6',
         "f-dark-blue" : "#647196",
         "f-dark-blue-200" :"#3A4374",
-        'f-dark-blue-300':'#373F68'
+        'f-dark-blue-300': '#373F68',
+        "f-light-red": "#F49F85",
+        "f-dark-red": "#D73737"
       }
     },
   },

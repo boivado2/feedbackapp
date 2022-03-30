@@ -19,7 +19,8 @@ function AuthState(props) {
   const getUser = async (token) => {
     try {
       const user = await jwtDecode(token)
-      dispatch({type:GET_USER, payload: user})
+      dispatch({ type: GET_USER, payload: user })
+      console.log(user)
     } catch (error) {}
  
   }

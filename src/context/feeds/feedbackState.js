@@ -1,7 +1,7 @@
 import { useReducer } from "react"
 import FeedbackReducer from "./feedbackReducer"
 import FeedbackContext from './feedbackContext';
-import { GET_FEEDBACKS, GET_FEEDBACK, SET_MENU_ITEM, GET_CATEGORIES, SET_CATEGORY, ADD_COMMENT, GET_COMMENT } from './../types';
+import { GET_FEEDBACKS, GET_FEEDBACK, SET_MENU_ITEM, GET_CATEGORIES, SET_CATEGORY, ADD_COMMENT, GET_COMMENT, DELETE_FEEDBACK, UPDATE_FEEDBACK } from './../types';
 import http from '../../services/httpService'
 
 
@@ -33,7 +33,8 @@ const FeedbackState = (props) => {
   // get feedback
   const getFeedback = async (suggestionId) => {
     try {
-      const {data} = await http.get(`http://localhost:1200/api/suggestions/${suggestionId}`)
+      const { data } = await http.get(`http://localhost:1200/api/suggestions/${suggestionId}`)
+     
       dispatch({ type: GET_FEEDBACK, payload: data })
     } catch (ex) {
       console.log(ex.response)
@@ -44,9 +45,7 @@ const FeedbackState = (props) => {
   // add feedback
   const addFeedback = async (feedback) => {
     try {
-      await http.post('http://localhost:1200/api/suggestions', feedback)
-      // console.log(data)
-    //  dispatch({type: ADD_FEEDBACK, payload:data})
+     await http.post('http://localhost:1200/api/suggestions', feedback)
     } catch (ex) {
       console.log(ex)
     }
@@ -57,16 +56,28 @@ const FeedbackState = (props) => {
   const updateFeedback = async (feedback) => {
     const body = { ...feedback }
     delete body._id
-    console.log(body)
     try {
     const {data} =   await http.put('http://localhost:1200/api/suggestions/'+ feedback._id, body)
-      console.log(data)
-    //  dispatch({type: ADD_FEEDBACK, payload:data})
+     dispatch({type: UPDATE_FEEDBACK, payload:data})
     } catch (ex) {
       console.log(ex.response)
     }
 
   }
+
+
+  // delete feedback
+  const deleteFeedback = async (id) => {
+    console.log(id)
+    try {
+     await http.delete('http://localhost:1200/api/suggestions/'+ id)
+     dispatch({type: DELETE_FEEDBACK, payload:id})
+    } catch (ex) {
+      console.log(ex.response)
+    }
+
+  }
+
 
 
   // get Categories
@@ -84,7 +95,7 @@ const FeedbackState = (props) => {
     // add comment associated with a give feedback
     const addComment= async (comment, id) => {
       try {
-      const {data} =   await http.post(`http://localhost:1200/api/suggestions/comments/${id}`, comment)
+      const {data} =   await http.post(`http://localhost:1200/api/suggestions/${id}/comments`, comment)
        dispatch({type: ADD_COMMENT, payload:data})
       } catch (ex) {
         console.log(ex.response)
@@ -95,8 +106,10 @@ const FeedbackState = (props) => {
       // get all comment associated with a given feedback
       const getComments = async (id) => {
         try {
-        const {data} =   await http.get(`http://localhost:1200/api/suggestions/comments/${id}`)
+          const { data } = await http.get(`http://localhost:1200/api/suggestions/${id}/comments`)
+
           dispatch({ type: GET_COMMENT, payload: data })
+          
         } catch (ex) {
           console.log(ex)
         }
@@ -127,6 +140,7 @@ const FeedbackState = (props) => {
       getFeedback,
       addFeedback,
       updateFeedback,
+      deleteFeedback,
       addComment,
       getCategories,
       getComments,

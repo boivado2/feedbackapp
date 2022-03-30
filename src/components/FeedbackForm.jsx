@@ -5,7 +5,7 @@ import FeedbackContext from './../context/feeds/feedbackContext';
 
 function FeedbackForm() {
 
-  const { addFeedback, getCategories, categories, feedback, updateFeedback } = useContext(FeedbackContext)
+  const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback } = useContext(FeedbackContext)
   
   const {id} = useParams()
   useEffect(() => {
@@ -58,7 +58,9 @@ function FeedbackForm() {
     )
   }
 
-  const onHandleDelete = () => {
+  const onHandleDelete = (id) => {
+    deleteFeedback(id)
+    navigate('/')
  
   }
   const {title, categoryId, description} = suggestion
@@ -112,14 +114,22 @@ function FeedbackForm() {
           <textarea value={description} onChange={onHandleChange} name='description' className='py-2 rounded-lg px-8  bg-light-white-100 outline-none' ></textarea>
         </div>
 
-        <div className='flex flex-col'>
-          <button  className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple mb-2'> Add Feedback</button>
-          <button onClick={onHandleCancel} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-dark-blue-200 my-3'>Cancel</button>
-          {
+        <div className='flex flex-col-reverse sm:flex-row sm:justify-between my-4'>
+        {
             suggestion._id
             &&
-            <button onClick={() => onHandleDelete(feedback._id)} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-dark-blue-200'>delete</button>
+            <button onClick={() => onHandleDelete(feedback._id)} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-dark-red hover:bg-f-light-red'>Delete</button>
           }
+          <div className='flex flex-col my-2 sm:my-0 sm:block'>
+            {
+              suggestion._id ?
+                (  <button className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple sm:mr-2 my-2 sm:my-0'> Save Changes</button>)
+                  :
+                (  <button className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple  sm:mr-2 my-2 sm:my-0'> Add Feedback</button>)
+          }
+            
+          <button onClick={onHandleCancel} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-dark-blue-200'>Cancel</button>
+          </div>
 
         </div>
       </form>

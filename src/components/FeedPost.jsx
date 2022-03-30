@@ -16,7 +16,7 @@ function FeedPost({ feedback }) {
       </div>
  
       <div className='order-3 flex justify-end flex-4  items-center '>
-        <span className='p-3 text-sm bg-light-white  rounded-xl w-fit h-fit '>{feedback.comments.length}</span>
+        <span className='p-3 text-sm bg-light-white  rounded-xl w-fit h-fit '>{feedback.commentsLength}</span>
       </div>
     </div>
   )

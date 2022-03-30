@@ -20,8 +20,7 @@ function FeedbackDetail() {
   useEffect(() => {
     getFeedback(id)
     getComments(id)
-    console.log('me')
-  },[comments.length])
+  },[comments.length, id])
   
   const onFormSubmit = (e) => {
     e.preventDefault()

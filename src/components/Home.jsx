@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from 'react/cjs/react.development';
+import { useState } from 'react/cjs/react.development';
 import SideBar from '../components/SideBar'
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import FeedPosts from '../components/FeedPosts';
-import { Link } from 'react-router-dom';
 
 function Home() {
 
@@ -23,7 +22,7 @@ function Home() {
       <Navbar hideSidebar={hideSidebar} showSidebar={showSidebar} mobileSidebar={mobileSidebar} />      
       <div className={` lg:container lg:mx-auto sm:p-9  flex  flex-col md:flex-row sm:gap-3  `}>
           <SideBar  mobileSidebar={mobileSidebar} />
-        <main className={`md:flex-3 md:flex flex-col gap-4 sm:filter-none ${mobileSidebar ? 'brightness-50 blur-sm' : ''}`}>
+        <main className={`sm:flex-3 sm:flex flex-col gap-4 sm:filter-none ${mobileSidebar ? 'brightness-50 blur-sm' : ''}`}>
           <Header />
           <FeedPosts/>
           </main>

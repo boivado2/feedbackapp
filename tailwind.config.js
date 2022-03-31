@@ -34,7 +34,9 @@ module.exports = {
         "f-dark-blue-200" :"#3A4374",
         'f-dark-blue-300': '#373F68',
         "f-light-red": "#F49F85",
-        "f-dark-red": "#D73737"
+        "f-dark-red": "#D73737",
+        "custom-color-10": "#62BCFA",
+        "custom-color-11": "#F49F85"
       }
     },
   },

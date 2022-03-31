@@ -5,7 +5,7 @@ import FeedbackContext  from '../context/feeds/feedbackContext'
 
 function Header() {
 
-  const{setMenuItem, menuItem} = useContext(FeedbackContext)
+  const{setMenuItem, menuItem, feedbacks} = useContext(FeedbackContext)
   const [menu, setMenu] = useState(false)
 
   const onMenuSelect = (menuItem) => {
@@ -22,10 +22,14 @@ function Header() {
   const onHideMenu = () => {
     setMenu(false)
   }
+
+  const getFeedStatus = (status) => {
+    return feedbacks.filter(feedback => feedback.status === status)
+  }
   return (
     <div className='p-2 bg-f-dark-blue-300 text-white sm:rounded-md flex justify-between'>
       <div className='flex justify-center items-center '>
-      <p className='hidden sm:flex'>Suggestion</p>
+        <p className='hidden sm:flex'> <span className=' pr-1'>{ getFeedStatus('suggestion').length}</span>  Suggestions</p>
       <DropMenu onHideMenu={onHideMenu} OnShowMenu={OnShowMenu} onMenuSelect={onMenuSelect} menu={menu} selectedMenuItem={menuItem} />
    </div>
       <Link to='/feedback/new' className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple'>+ Add Feedback</Link>

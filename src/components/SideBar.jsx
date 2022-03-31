@@ -8,7 +8,7 @@ import AuthContext from './../context/auth/authContext';
 function SideBar({ mobileSidebar }) {
   const { isAuthenticated, logOutUser } = useContext(AuthContext)
 
- const {getCategories, categories, setCategory, selectedCategory} =  useContext(FeedbackContext)
+ const {getCategories, categories, setCategory, selectedCategory, feedbacks} =  useContext(FeedbackContext)
   
 
   useEffect(() => {
@@ -23,6 +23,13 @@ function SideBar({ mobileSidebar }) {
     logOutUser()
     window.location = '/'
   }
+
+  const filteredByStatus = (status) => {
+    return feedbacks.filter(feedback => feedback.status === status)
+  }
+
+  
+  
   return (
     <div className={` absolute  flex sm:transform-none sm:static right-0 sm:left-0  flex-col sm:flex-row md:flex-col gap-4 sm:gap-2 p-9 h-full rounded-sm sm:p-0 bg-light-white sm:bg-inherit sm:w-full  md:flex-2  ${!mobileSidebar  ? 'translate-x-72' : 'transform-none'} transition-all ease-linear delay-75 z-20`}> 
       <div className="hidden bg-radial text-white  rounded-lg sm:flex flex-col  sm:w-full bg-white  items-start justify-end p-4 text-clip ">
@@ -36,7 +43,7 @@ function SideBar({ mobileSidebar }) {
         bg-white rounded-lg sm:w-full p-3">
         <div className=" flex justify-between mt-3 mb-3">
           <h4 className='mr-4'>Roadmap</h4>
-          <Link to="">Views</Link>
+          <Link to="/roadmap">Views</Link>
         </div>
         <div className='flex justify-between items-center'>
           <div>
@@ -45,9 +52,9 @@ function SideBar({ mobileSidebar }) {
             <p>Live</p>
           </div>
           <div>
-            <p>2</p>
-            <p className='my-2'>3</p>
-            <p>1</p>
+            <p>{ filteredByStatus("planned").length}</p>
+            <p className='my-2'>{ filteredByStatus("in-progress").length}</p>
+            <p>{ filteredByStatus("live").length}</p>
           </div>
           
         </div>

@@ -10,18 +10,22 @@ function FeedPosts() {
   const { getFeedbacks, feedbacks, menuItem, selectedCategory } = useContext(feedbackContext)
   useEffect(() => {
     getFeedbacks()
-  }, [])
+  }, [feedbacks.length])
 
 
   const filtered = selectedCategory && selectedCategory._id ? feedbacks.filter(feedback => feedback.category._id === selectedCategory._id) : feedbacks
 
-  const sorted = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
+  const sortedFeedback = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
 
+  const filteredByStatus = (status) => {
+    return sortedFeedback.filter(feedback => feedback.status === status)
+  }
 
- if (sorted.length === 0) return <NoFeedback/>  
+  if (sortedFeedback.length === 0) return <NoFeedback />  
+  if(filteredByStatus('suggestion').length === 0) return <p>No Suggestion</p>
   return (
     <div className='p-3 flex flex-col gap-2 sm:p-0'>
-     {sorted.map(feedback => <FeedPost key={feedback._id} feedback={feedback}/>)}
+     {filteredByStatus('suggestion').map(feedback => feedback.status === 'suggestion' ? <FeedPost key={feedback._id} feedback={feedback}/>: 'No suggeston Avaliable')}
     </div>
   )
 }

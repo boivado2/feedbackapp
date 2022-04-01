@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 function RoadMapFeed({ feedback }) {
   return (
-    <div className={` px-3 py-1 bg-white rounded-md flex flex-col  justify-start gap-6 border-t-4 ${feedback.status === 'planned' ? 'border-custom-color-11': "border-custom-color-10" && feedback.status === 'in-progress' ? " border-f-purple": " border-custom-color-10"}`}>
+    <div className={` px-3 py-1 bg-white rounded-md flex flex-col  justify-start gap-6 border-t-4 sm:h-64 lg:h-full ${feedback.status === 'planned' ? 'border-custom-color-11': "border-custom-color-10" && feedback.status === 'in-progress' ? " border-f-purple": " border-custom-color-10"}`}>
       <div className='flex flex-col  gap-1 p-1 mb-1 flex-3'> 
         <div className='flex items-center'>
           <span className={

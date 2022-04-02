@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import Joi from 'joi-browser'
 import AuthContext from './../context/auth/authContext';
+import Input from './common/Input';
+import validateFormInput from './utils/validateFormInput';
 
 function LoginForm() {
 
@@ -14,13 +17,31 @@ function LoginForm() {
   },[isAuthenticated])
   const [user, setUser] = useState({
     username: '',
-    password: ""
+    password: "",
   })
+  const [errors, setErrors] = useState({})
 
+  const schema = Joi.object( {
+    username: Joi.string().required().min(3).label("Username"),
+    password : Joi.string().required().min(4).label("Password")
+  })
+ 
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    loginUser(user)
+
+    const errors = validateFormInput(user, schema)
+    if (errors) {
+      setErrors(errors)
+    } else {
+      loginUser(user)
+      setErrors({})
+    }
+    
+    
+
+  
     
   }
 
@@ -34,8 +55,11 @@ function LoginForm() {
             <Link className='pb-10' to="/">go back</Link>
       <form onSubmit={handleSubmit} className='bg-white rounded-xl p-8 flex flex-col gap-4' >
       <h2 className='text-2xl text-center mb-8'>Login</h2>
-        <input onChange={handleInputChange} className='py-2 rounded-lg px-8  bg-light-white-100 outline-none' value={username} type="text" name='username' placeholder='Username' />
-        <input onChange={handleInputChange} className='py-2 rounded-lg px-8  bg-light-white-100 outline-none' value={password} type="password" name='password' placeholder='Password' />
+
+        <Input onChange={handleInputChange} value={username} name='username' type="text" label='Username' error={errors.username} />
+      
+        <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
+
         <button  className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple mb-2 w-fit'> Login</button>
       </form>
     </div>

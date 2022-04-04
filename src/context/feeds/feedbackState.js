@@ -97,9 +97,7 @@ const FeedbackState = (props) => {
       try {
       const {data} =   await http.post(`http://localhost:1200/api/suggestions/${id}/comments`, comment)
        dispatch({type: ADD_COMMENT, payload:data})
-      } catch (ex) {
-        console.log(ex.response.data)
-      }
+      } catch (ex) { }
   
   }
   
@@ -110,9 +108,7 @@ const FeedbackState = (props) => {
 
           dispatch({ type: GET_COMMENT, payload: data })
           
-        } catch (ex) {
-          console.log(ex)
-        }
+        } catch (ex) {}
     
   }
    

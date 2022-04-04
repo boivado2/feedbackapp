@@ -7,6 +7,7 @@ import Input from './common/Input';
 import Select from './common/Select';
 import validateFormInput from './utils/validateFormInput';
 import Textarea from './common/Textarea';
+import Btn from './common/Btn';
 
 function FeedbackForm() {
 
@@ -129,17 +130,19 @@ function FeedbackForm() {
         {
             suggestion._id
             &&
-            <button onClick={() => onHandleDelete(feedback._id)} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-dark-red hover:bg-f-light-red'>Delete</button>
+            <Btn title="Delete" onClick={() => onHandleDelete(feedback._id)} styles=" bg-f-dark-red hover:bg-f-light-red"/>
           }
           <div className='flex flex-col my-2 sm:my-0 sm:block'>
             {
               suggestion._id ?
-                (  <button className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple sm:mr-2 my-2 sm:my-0'> Save Changes</button>)
+                (      <Btn title="Save Feedback" styles="bg-f-purple sm:mr-2 my-2 sm:my-0"/>)
                   :
-                (  <button className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple  sm:mr-2 my-2 sm:my-0'> Add Feedback</button>)
+                (
+                <Btn title="Add Feedback" styles="bg-f-purple sm:mr-2 my-2 sm:my-0"/>)
           }
             
-          <button onClick={onHandleCancel} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-dark-blue-200'>Cancel</button>
+            <Btn title="Cancel" onClick={onHandleCancel} styles=" bg-f-dark-blue-200"/>
+      
           </div>
 
         </div>

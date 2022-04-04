@@ -2,6 +2,10 @@
 import React, { useState, useContext } from 'react'
 import AuthContext from './../context/auth/authContext';
 import FeedbackContext from './../context/feeds/feedbackContext';
+import  Joi  from 'joi-browser';
+import validateFormInput from './utils/validateFormInput';
+import Textarea from './common/Textarea';
+import Btn from './common/Btn';
 
 
 
@@ -13,6 +17,7 @@ function Comment({ comment }) {
   
 
   const [form, setForm] = useState(false)
+  const [errors, setErrors] = useState({})
 
   const [reply, setReply] = useState({
     content: "",
@@ -22,15 +27,30 @@ function Comment({ comment }) {
   })
 
 
+  const schema = Joi.object({
+    content: Joi.string().min(4).max(225).required(),
+    userId: Joi.string().required(),
+    parentId: Joi.string(),
+    replyingTo: Joi.string()
+  })
+
+
   const handleFormSubmit = (e) => { 
     e.preventDefault()
-    console.log(reply)
-    addComment(reply, comment.suggestionId)
-    setForm(false)
+
+    const errors = validateFormInput(reply, schema)
+    if (errors) {
+      setErrors(errors)
+    } else {
+      addComment(reply, comment.suggestionId)
+      setForm(false)
+      setErrors({})
+    }
+  
     
   }
 
-  const handleInputChange = (e) => {
+  const onHandleInput = (e) => {
     setReply({...reply, content: e.target.value})
   }
 
@@ -40,6 +60,7 @@ function Comment({ comment }) {
 
   const handleHideForm = () => {
     setForm(false)
+    setErrors({})
   }
   return (
     <div className='w-full flex flex-col p-2 sm:px-9 mt-3'>
@@ -66,9 +87,10 @@ function Comment({ comment }) {
           {comment.content}
         </p>
         {form ? (
-            <form onSubmit={handleFormSubmit} className='flex gap-2 my-4' >
-            <textarea value={reply.content} onChange={handleInputChange}  placeholder='Type Your comment here' name="content"  className='py-4 px-5 bg-light-white-100 w-full flex-5 lg:flex-3' ></textarea>
-            <button  className='border-none h-fit  py-2 lg:px-1  text-xs lg:text-sm text-white rounded-md bg-f-purple flex-2 lg:flex-4'>Post Reply</button>
+            <form onSubmit={handleFormSubmit} className='flex gap-2 my-4 flex-col md:flex-row sm:ml-14' >
+          <Textarea name="content" value={reply.content} onChange={onHandleInput} holder="Type your comment here" error={errors.content} styles="md:flex-5" />
+          <Btn title="Post Reply" styles=" bg-f-purple mt-3  lg:px-1 h-fit md:flex-2 w-fit"/>
+
           </form>
         ) : ''}
         

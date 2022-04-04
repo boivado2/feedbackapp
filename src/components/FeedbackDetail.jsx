@@ -5,6 +5,10 @@ import FeedbackContext from './../context/feeds/feedbackContext';
 import Comments from './Comments';
 import FeedPost from './FeedPost';
 import AuthContext from './../context/auth/authContext';
+import Textarea from './common/Textarea';
+import Joi from 'joi-browser';
+import validateFormInput from './utils/validateFormInput';
+import Btn from './common/Btn';
 
 function FeedbackDetail() {
   const { user } = useContext(AuthContext)
@@ -16,6 +20,13 @@ function FeedbackDetail() {
     userId: user._id
   })
 
+  const [errors, setErrors] = useState({})
+
+  const schema = Joi.object({
+    content: Joi.string().min(4).max(225).required(),
+    userId: Joi.string().required()
+  })
+
 
   useEffect(() => {
     getFeedback(id)
@@ -24,11 +35,18 @@ function FeedbackDetail() {
   
   const onFormSubmit = (e) => {
     e.preventDefault()
-    addComment(comment, id)
-    setComment({content: '', userId: user._id})
+    const errors = validateFormInput(comment, schema)
+    if (errors) {
+      setErrors(errors)
+    } else {
+      addComment(comment, id)
+      setComment({content: '', userId: user._id})
+      setErrors({})
+    }
+
   }
 
-  const onFormInput = (e) => {
+  const onHandleInput = (e) => {
     setComment({...comment, content: e.target.value})
 
   }
@@ -44,10 +62,9 @@ function FeedbackDetail() {
       <Comments comments={comments}/>
 
       <div className="flex bg-white flex-col p-5">
-        <h3 className='text-xl'>Add Comment</h3>
         <form onSubmit={onFormSubmit} >
-        <textarea onChange={onFormInput}  placeholder='Type Your comment here' name="content" value={content} className='py-4 px-5 bg-light-white-100 w-full my-6' ></textarea>
-          <button className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple'>Post Comment</button>
+          <Textarea name="content" value={content} onChange={onHandleInput} label="Add Comment" holder = "Type your comment here" error={errors.content} />
+          <Btn title="Post Comment" styles=" bg-f-purple mt-2"/>
         </form>
       </div>
     </div>

@@ -5,6 +5,7 @@ import Joi from 'joi-browser'
 import AuthContext from './../context/auth/authContext';
 import Input from './common/Input';
 import validateFormInput from './utils/validateFormInput';
+import Btn from './common/Btn';
 
 function LoginForm() {
 
@@ -66,7 +67,7 @@ function LoginForm() {
       
         <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
 
-        <button  className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple mb-2 w-fit'> Login</button>
+        <Btn title="Login" styles=" bg-f-purple mb-2 w-fit"/>
       </form>
     </div>
   )

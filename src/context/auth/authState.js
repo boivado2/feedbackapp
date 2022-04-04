@@ -3,7 +3,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import AuthContext from './authContext';
 import AuthReducer from "./authReducer.js"
-import {REGISTER_USER, LOGIN_USER, LOG_OUT, GET_USER} from '../types'
+import {LOGIN_USER, LOG_OUT, GET_USER, LOGIN_FAIL, CLEAR_ERROR} from '../types'
 
 
 
@@ -11,7 +11,8 @@ function AuthState(props) {
 
   const initialState = {
     user: {},
-    isAuthenticated: false
+    isAuthenticated: false,
+    error: {}
   }
 
   const [state, dispatch] = useReducer(AuthReducer, initialState)
@@ -31,9 +32,16 @@ function AuthState(props) {
       const { data } = await axios.post('http://localhost:1200/api/auth', user)
       dispatch({type:LOGIN_USER, payload: data})
     } catch (ex) {
-      console.log(ex.response.data)
+      if (ex.response && ex.response.status === 400) {
+        dispatch({type: LOGIN_FAIL, payload: ex.response.data})
+      }
+     
     }
  
+  }
+
+ const clearError = () => {
+    setTimeout(() => dispatch({type: CLEAR_ERROR}), 100)
   }
 
 
@@ -42,13 +50,17 @@ function AuthState(props) {
   const logOutUser = async () => {
         dispatch({type:LOG_OUT})
   }
+
+
   
   return  <AuthContext.Provider value={{
       user: state.user,
-      isAuthenticated: state.isAuthenticated,
+    isAuthenticated: state.isAuthenticated,
+      error: state.error,
       loginUser,
       logOutUser,
-      getUser
+    getUser,
+    clearError
     }} >
       {props.children}
     </AuthContext.Provider>

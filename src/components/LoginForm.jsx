@@ -8,18 +8,29 @@ import validateFormInput from './utils/validateFormInput';
 
 function LoginForm() {
 
-  const { loginUser, isAuthenticated } = useContext(AuthContext)
+  const { loginUser, isAuthenticated, error, clearError } = useContext(AuthContext)
+  
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      window.location = '/'
-    }
-  },[isAuthenticated])
   const [user, setUser] = useState({
     username: '',
     password: "",
   })
   const [errors, setErrors] = useState({})
+
+
+  
+  useEffect(() => {
+    if (isAuthenticated) {
+      window.location = '/'
+    }
+
+    if (error === "invalid username or password") {
+      const newError = { ...errors }
+      newError.username = error
+      setErrors(newError)
+      clearError()
+    }
+  },[isAuthenticated, error])
 
   const schema = Joi.object( {
     username: Joi.string().required().min(3).label("Username"),
@@ -38,11 +49,6 @@ function LoginForm() {
       loginUser(user)
       setErrors({})
     }
-    
-    
-
-  
-    
   }
 
   const handleInputChange = (e) => {

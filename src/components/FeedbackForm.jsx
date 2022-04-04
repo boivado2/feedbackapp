@@ -1,18 +1,40 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useContext, useEffect} from 'react'
-import { Link,useNavigate, useParams  } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import  Joi  from 'joi-browser';
 import FeedbackContext from './../context/feeds/feedbackContext';
+import Input from './common/Input';
+import Select from './common/Select';
+import validateFormInput from './utils/validateFormInput';
+import Textarea from './common/Textarea';
 
 function FeedbackForm() {
 
   const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback } = useContext(FeedbackContext)
+
+  const navigate = useNavigate()
+  const [suggestion, setSuggestion] = useState({
+    title: '',
+    categoryId: "",
+    description: ""
+  })
+  const [errors, setErros] = useState({})
   
   const {id} = useParams()
   useEffect(() => {
     getCategories()
     if (id === 'new') return
     setSuggestion(mapToViewModel(feedback))
-  },[])
+  }, [])
+  
+  const schema = Joi.object({
+    _id: Joi.string(),
+    title: Joi.string().required(),
+    categoryId: Joi.string().required(),
+    description: Joi.string().required(),
+    upvotes: Joi.number(),
+    status: Joi.string()
+  })
   
   const mapToViewModel =  (feedback) => {
     return {
@@ -25,22 +47,21 @@ function FeedbackForm() {
    }
  }
 
-  const navigate = useNavigate()
-  const [suggestion, setSuggestion] = useState({
-    title: '',
-    categoryId: "",
-    description: ""
-  })
 
-
-  const onHandleForm = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault()
-    if (suggestion._id) {
-      updateFeedback(suggestion)
+    const errors = validateFormInput(suggestion, schema)
+    if (errors) {
+      setErros(errors)
     } else {
-      addFeedback(suggestion)
+      if (suggestion._id) {
+        updateFeedback(suggestion)
+      } else {
+        addFeedback(suggestion)
+      }
+      navigate('/')
     }
-    navigate('/')
+
   }
 
   const onHandleChange  = (e) => {
@@ -63,13 +84,21 @@ function FeedbackForm() {
     navigate('/')
  
   }
+
+  const status = [
+    "suggestion",
+    "planned",
+    "in-progress",
+    "live"
+  ]
+
   const {title, categoryId, description} = suggestion
   return (
     <div className='sm:container mx-auto p-6 md:px-28 lg:px-56 flex flex-col justify-between'>
 
       <Link className='pb-10' to="/">go back</Link>
 
-      <form onSubmit={onHandleForm} className='bg-white rounded-xl p-4 flex flex-col gap-4'>
+      <form onSubmit={onSubmitForm} className='bg-white rounded-xl p-4 flex flex-col gap-4'>
         {!suggestion._id ?
           (
                   <h2 className='text-2xl text-f-dark-blue-300 my-6 dark:text-black'>Create New Feedback</h2>
@@ -78,41 +107,23 @@ function FeedbackForm() {
           (
             <h2 className='text-2xl text-f-dark-blue-300 my-6 dark:text-black'>Editing { `"${feedback.title}"`}</h2>
           )}
-        <div className='flex flex-col'>
-          <h4 className='text-lg'>Feedback Title</h4>
-          <span className='text-sm my-2'>Add a short, descriptive headline</span>
-          <input onChange={onHandleChange} name="title" value={title} className='py-2 rounded-lg px-8  bg-light-white-100 outline-none' type="text"/>
-        </div>
 
+        <Input value={title} onChange={onHandleChange} name="title" label="Feedback Title" desc='Add a short, descriptive headline' error={errors.title}  />
+        
 
         <div className='flex flex-col'>
-          <h4 className='text-lg'>Category</h4>
-          <span className='text-sm my-2'>Choose a category for your feedback</span>
-          <select value={categoryId} onChange={onHandleChange} name='categoryId' className='py-2 rounded-lg px-8 bg-light-white-100 outline-none' >
-          {categories.map(category => (
-          <option key={category._id} value={category._id}>{category.title}</option>
-        ))}
-          </select>
+          <Select onChange={onHandleChange}
+            value={categoryId} name="categoryId" items={categories} error={errors.categoryId} label="Category" desc="Choose a category for your feedback" />
         </div>
 
         {suggestion.status &&
-          <div className='flex flex-col'>
-          <h4 className='text-lg'>Update Status</h4>
-            <span className='text-sm my-2'>Change Feature State</span>
-          <select value={suggestion.status} onChange={onHandleChange} name='status' className='py-2 rounded-lg px-8 bg-light-white-100 outline-none' >
-              <option value="suggestion">Suggestion</option>
-              <option  value="planned">Planned</option>
-              <option  value="live">Live</option>
-              <option  value="in-progress">In-Progress</option>
-          </select>
-          </div>
+  
+            <Select items={status}
+              onChange={onHandleChange} name="status" value={suggestion.status} label="Update Status" desc = 'Change Feature State' />
         }
 
-        <div className='flex flex-col '>
-          <h4 className='text-lg'>Feedback Detail</h4>
-          <span className='text-sm my-2'>Include any specific comments on what should be improved, added, etc</span>
-          <textarea value={description} onChange={onHandleChange} name='description' className='py-2 rounded-lg px-8  bg-light-white-100 outline-none' ></textarea>
-        </div>
+      
+          <Textarea value={description} onChange={onHandleChange} name="description" error={errors.description} label="Feedback Detail" desc="Include any specific comments on what should be improved, added, etc"/>
 
         <div className='flex flex-col-reverse sm:flex-row sm:justify-between my-4'>
         {

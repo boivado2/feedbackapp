@@ -33,7 +33,7 @@ function FeedbackForm() {
     title: Joi.string().required(),
     categoryId: Joi.string().required(),
     description: Joi.string().required(),
-    upvotes: Joi.number(),
+    upvotes: Joi.array(),
     status: Joi.string()
   })
   

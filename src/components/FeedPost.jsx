@@ -12,7 +12,7 @@ function FeedPost({ feedback }) {
       </div>
 
       <div className='order-1 flex flex-4 items-start justify-start sm:items-start sm:justify-start'>
-        <span className='p-3 text-sm bg-light-white rounded-xl w-fit h-fit mt-5 cursor-pointer '>{feedback.upvotes}</span>
+        <span className='p-3 text-sm bg-light-white rounded-xl w-fit h-fit mt-5 cursor-pointer '>{feedback.upvotes.length}</span>
       </div>
  
       <div className='order-3 flex justify-end flex-4  items-center '>

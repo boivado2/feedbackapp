@@ -2,8 +2,8 @@ import React from 'react'
 
 function DropMenu({onMenuSelect, selectedMenuItem, menu, onHideMenu, OnShowMenu}) {
   const menuList = [
-    { title: "Most Upvotes", id: 1, sortPath: "upvotes", sortOrder: "desc"  },
-    { title: "Least Upvotes", id: 2, sortPath: 'upvotes', sortOrder: "asc" },
+    { title: "Most Upvotes", id: 1, sortPath: "upvotes.length", sortOrder: "desc"  },
+    { title: "Least Upvotes", id: 2, sortPath: 'upvotes.length', sortOrder: "asc" },
     { title: "Most Comments", id: 3, sortPath: 'commentsLength', sortOrder: "desc" },
     { title: "Least Comments", id: 4, sortPath: 'commentsLength', sortOrder: "asc" },
 

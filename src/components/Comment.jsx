@@ -21,7 +21,6 @@ function Comment({ comment }) {
 
   const [reply, setReply] = useState({
     content: "",
-    userId: user._id,
     parentId: comment._id,
     replyingTo: comment.user.username
   })
@@ -29,7 +28,6 @@ function Comment({ comment }) {
 
   const schema = Joi.object({
     content: Joi.string().min(4).max(225).required(),
-    userId: Joi.string().required(),
     parentId: Joi.string(),
     replyingTo: Joi.string()
   })

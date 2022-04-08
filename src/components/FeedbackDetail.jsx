@@ -11,20 +11,17 @@ import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
 
 function FeedbackDetail() {
-  const { user } = useContext(AuthContext)
   const { getFeedback, feedback, addComment, getComments, comments } = useContext(FeedbackContext)
   const { id } = useParams()
   
   const [comment, setComment] = useState({
     content: "",
-    userId: user._id
   })
 
   const [errors, setErrors] = useState({})
 
   const schema = Joi.object({
     content: Joi.string().min(4).max(225).required(),
-    userId: Joi.string().required()
   })
 
 
@@ -40,7 +37,7 @@ function FeedbackDetail() {
       setErrors(errors)
     } else {
       addComment(comment, id)
-      setComment({content: '', userId: user._id})
+      setComment({content: ''})
       setErrors({})
     }
 

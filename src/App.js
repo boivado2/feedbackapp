@@ -7,6 +7,11 @@ import LoginForm from './components/LoginForm';
 import AuthContext from './context/auth/authContext';
 import './App.css';
 import RoadMap from './components/RoadMap';
+import httpService from './services/httpService'
+
+if (localStorage.token) {
+  httpService.setAuthToken(localStorage.token)
+}
 
 
 

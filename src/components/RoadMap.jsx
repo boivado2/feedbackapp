@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import FeedbackContext from './../context/feeds/feedbackContext';
 import RoadMapFeed from './RoadMapFeed';
+import FeedPost from './FeedPost';
 
 function RoadMap() {
   const { feedbacks, getFeedbacks } = useContext(FeedbackContext)
@@ -55,7 +56,7 @@ function RoadMap() {
             </div>
               <div className='flex flex-col gap-2'>
               {filteredByStatus(status.title).map(feedback => (
-                <RoadMapFeed key={feedback._id} feedback=
+                <FeedPost key={feedback._id} feedback=
                   {feedback} />
               ))}
         </div>

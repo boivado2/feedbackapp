@@ -1,4 +1,6 @@
 import React from 'react'
+import hamburgerCloseSvg from '../shared/mobile/icon-close.svg'
+import hamburgerOpenSvg from '../shared/mobile/icon-hamburger.svg'
 
 function Navbar({hideSidebar, showSidebar, mobileSidebar}) {
 
@@ -17,7 +19,7 @@ function Navbar({hideSidebar, showSidebar, mobileSidebar}) {
       <h1 className='text-lg'>Frontend Mentor</h1>
       <h2 className='text-sm'>Feedback Dashboard</h2>
       </div>
-      {!mobileSidebar ? <p className=' cursor-pointer' onClick={onShowSidebar}>open</p> : <p className=' cursor-pointer' onClick={onHideSidebar}>X</p>}
+      {!mobileSidebar ? <p className=' cursor-pointer' onClick={onShowSidebar}><img src={hamburgerOpenSvg} alt="" /></p> : <p className=' cursor-pointer' onClick={onHideSidebar}><img src={hamburgerCloseSvg} alt="" /></p>}
     </div>
   )
 }

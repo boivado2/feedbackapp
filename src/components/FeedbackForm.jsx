@@ -8,6 +8,11 @@ import Select from './common/Select';
 import validateFormInput from './utils/validateFormInput';
 import Textarea from './common/Textarea';
 import Btn from './common/Btn';
+import arrowLeftSvg from '../shared/icon-arrow-left.svg';
+import newFeedbackSvg from '../shared/icon-new-feedback.svg';
+import editFeedbackSvg from '../shared/icon-edit-feedback.svg';
+
+
 
 function FeedbackForm() {
 
@@ -96,10 +101,13 @@ function FeedbackForm() {
   const {title, categoryId, description} = suggestion
   return (
     <div className='sm:container mx-auto p-6 md:px-28 lg:px-56 flex flex-col justify-between'>
-
-      <Link className='pb-10' to="/">go back</Link>
-
+  <Link className='pb-10' to="/"> <img className='inline-block pr-3' src={arrowLeftSvg} alt=""/>
+        go back</Link>
       <form onSubmit={onSubmitForm} className='bg-white rounded-xl p-4 flex flex-col gap-4'>
+        <div className=' absolute top-16'>
+          {suggestion._id ? <img src={ editFeedbackSvg} alt="" /> : <img width="40px" src={ newFeedbackSvg} alt=""/>}
+        </div>
+
         {!suggestion._id ?
           (
                   <h2 className='text-2xl text-f-dark-blue-300 my-6 dark:text-black'>Create New Feedback</h2>

@@ -4,6 +4,7 @@ import _ from 'lodash'
 import feedbackContext from '../context/feeds/feedbackContext'
 import FeedPost from './FeedPost'
 import NoFeedback from './NoFeedback';
+import filteredByStatus from './utils/filteredByStatus'
 
 
 function FeedPosts() {
@@ -12,20 +13,19 @@ function FeedPosts() {
     getFeedbacks()
   }, [feedbacks.length])
 
+  const allSuggestionFeedback = filteredByStatus(feedbacks, 'suggestion')
+  
 
-  const filtered = selectedCategory && selectedCategory._id ? feedbacks.filter(feedback => feedback.category._id === selectedCategory._id) : feedbacks
+  const filtered = selectedCategory && selectedCategory._id ? allSuggestionFeedback.filter(feedback => feedback.category._id === selectedCategory._id) : allSuggestionFeedback
 
-  const sortedFeedback = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
+  const sorted= _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
 
-  const filteredByStatus = (status) => {
-    return sortedFeedback.filter(feedback => feedback.status === status)
-  }
 
-  if (sortedFeedback.length === 0) return <NoFeedback />  
-  if(filteredByStatus('suggestion').length === 0) return <p>No Suggestion</p>
+  if (!feedbacks) return <NoFeedback />  
+  if(!allSuggestionFeedback) return <p>No Suggestion</p>
   return (
     <div className='p-3 flex flex-col gap-2 sm:p-0'>
-     {filteredByStatus('suggestion').map(feedback => feedback.status === 'suggestion' ? <FeedPost key={feedback._id} feedback={feedback}/>: 'No suggeston Avaliable')}
+     {sorted.map(feedback => feedback.status === 'suggestion' ? <FeedPost key={feedback._id} feedback={feedback}/>: 'No suggeston Avaliable')}
     </div>
   )
 }

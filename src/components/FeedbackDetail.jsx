@@ -4,11 +4,11 @@ import { Link, useParams } from 'react-router-dom'
 import FeedbackContext from './../context/feeds/feedbackContext';
 import Comments from './Comments';
 import FeedPost from './FeedPost';
-import AuthContext from './../context/auth/authContext';
 import Textarea from './common/Textarea';
 import Joi from 'joi-browser';
 import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
+import arrowLeftSvg from '../shared/icon-arrow-left.svg'
 
 function FeedbackDetail() {
   const { getFeedback, feedback, addComment, getComments, comments } = useContext(FeedbackContext)
@@ -52,7 +52,8 @@ function FeedbackDetail() {
   return (
     <div className='lg:container mx-auto px-6 py-10 md:px-24 md:py-10 flex  flex-col  gap-3'>
       <div className='flex justify-between items-center'>
-      <Link className='' to="/">go back</Link>
+        <Link className='' to="/"> <img className='inline-block pr-3' src={arrowLeftSvg} alt=""/>
+ go back</Link>
       <Link to={`/feedback/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-light-blue'>Edit Feedback</Link>
       </div>
       <FeedPost feedback={feedback} />

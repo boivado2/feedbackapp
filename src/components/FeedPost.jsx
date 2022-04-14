@@ -4,7 +4,9 @@ import commentSvg from '../shared/icon-comments.svg';
 import arrowupSvg from '../shared/icon-arrow-up.svg';
 
 
-function FeedPost({ feedback }) {
+function FeedPost({ feedback, onClick }) {
+
+  const [hasVoted, setHasVoted] = React.useState(false)
 
   return (
 
@@ -26,12 +28,16 @@ function FeedPost({ feedback }) {
           }
         </div>
        
-        <NavLink to={`/suggestions/${feedback._id}`} className='text-lg cursor-pointer text-f-dark-blue-300 w-fit'>{feedback.title}</NavLink>
-        <p className='text-xs my-2 text-f-dark-blue'> {feedback.description}</p>
-        <span className='p-2 text-sm bg-light-white  rounded-lg w-fit h-fit text-f-light-blue'>{feedback.category.title}</span>
+        <NavLink to={`/suggestions/${feedback._id}`} className='text-lg cursor-pointer text-f-dark-blue-300 w-fit sm:text-xl'>{feedback.title}</NavLink>
+        <p className='text-xs my-2  sm:text-base  text-f-dark-blue'> {feedback.description}</p>
+        <span className='p-2 text-sm sm:text-base bg-light-white  rounded-lg w-fit h-fit text-f-light-blue'>{feedback.category.title}</span>
       </div>
 
-        <span className={`p-3 text-sm bg-light-white cursor-pointer inline-block absolute left-4 bottom-4 rounded-xl w-fit  ${feedback.status === 'suggestion' ? "sm:order-1 sm:mb-0 sm:static": ""}`}> <img src={arrowupSvg} alt="" /> {feedback.upvotes.length}</span>
+      <span onClick={() => {
+        setHasVoted(true)
+        onClick(feedback._id, hasVoted)
+      }
+      } className={`p-3 text-sm bg-light-white cursor-pointer inline-block absolute left-4 bottom-4 rounded-xl w-fit  ${feedback.status === 'suggestion' ? "sm:order-1 sm:mb-0 sm:static" : ""}`}> <img src={arrowupSvg} alt="" /> {feedback.upvotes.length}</span>
  
         <span className={`p-3 text-sm inline-flex absolute right-4 bottom-4 rounded-xl w-fit ${feedback.status === 'suggestion' ? "sm:order-3 sm:mb-0 sm:static": ""}`}> <img className='pr-3 ' src={commentSvg} alt="" /> {feedback.commentsLength}</span>
     </div>

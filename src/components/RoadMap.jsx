@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FeedbackContext from './../context/feeds/feedbackContext';
 import FeedPost from './FeedPost';
 import filteredByStatus from './utils/filteredByStatus';
 import arrowLeftSvg from '../shared/icon-arrow-left.svg';
+import Goback from './common/Goback';
 
 function RoadMap() {
   const { feedbacks, getFeedbacks } = useContext(FeedbackContext)
@@ -13,7 +14,8 @@ function RoadMap() {
     getFeedbacks()
   }, [])
 
-  const [selectedStatus, setCurrentStatus] = useState( { id: 1, title: "planned" })
+  const [selectedStatus, setCurrentStatus] = useState({ id: 1, title: "planned" })
+  const navigate = useNavigate()
 
   const status =[
     { id: 1, title: "planned", description:"Ideas prioritized for research" },
@@ -32,8 +34,7 @@ function RoadMap() {
       
       <div className='p-4 sm:mt-4 bg-f-dark-blue-300 text-white sm:rounded-md flex justify-between items-center'>
       <div className='flex flex-col justify-center items-center '>
-      <Link className='pb-1 text-xs underline' to="/"> <img className='inline-block pr-3' src={arrowLeftSvg} alt=""/>
-            Go Back</Link>
+      <Goback color="text-white"/>
           <h3>Roadmap</h3>
    </div>
       <Link to='/feedback/new' className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-purple'>+ Add Feedback</Link>

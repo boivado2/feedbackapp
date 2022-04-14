@@ -18,11 +18,11 @@ function Home() {
   }
  
   return (
-    <div className={`font-jost text-sm overflow-x-hidden flex flex-col ${mobileSidebar ? 'overflow-y-hidden h-screen sm:overflow-y-scroll sm:h-full' : ''}`}>
+    <div className={`font-jost text-sm overflow-x-hidden flex flex-col transition-all ${mobileSidebar ? 'overflow-y-hidden h-screen sm:overflow-y-scroll sm:h-full' : ''}`}>
       <Navbar hideSidebar={hideSidebar} showSidebar={showSidebar} mobileSidebar={mobileSidebar} />      
       <div className={` lg:container lg:mx-auto sm:p-9  flex  flex-col md:flex-row sm:gap-3  `}>
           <SideBar  mobileSidebar={mobileSidebar} />
-        <main className={`sm:flex-3 sm:flex flex-col gap-4 sm:filter-none ${mobileSidebar ? 'brightness-50 blur-sm' : ''}`}>
+        <main className={`sm:flex-3 sm:flex flex-col gap-4 sm:filter-none transition-all ${mobileSidebar ? 'brightness-50 blur-sm' : ''}`}>
           <Header />
           <FeedPosts/>
           </main>

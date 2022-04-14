@@ -11,6 +11,7 @@ import Btn from './common/Btn';
 import arrowLeftSvg from '../shared/icon-arrow-left.svg';
 import newFeedbackSvg from '../shared/icon-new-feedback.svg';
 import editFeedbackSvg from '../shared/icon-edit-feedback.svg';
+import Goback from './common/Goback';
 
 
 
@@ -65,7 +66,7 @@ function FeedbackForm() {
       } else {
         addFeedback(suggestion)
       }
-      navigate('/')
+      navigate(-1)
     }
 
   }
@@ -75,7 +76,7 @@ function FeedbackForm() {
   }
 
   const onHandleCancel = () => {
-    navigate('/')
+    navigate(-1)
     setSuggestion(
       {
         title: '',
@@ -88,7 +89,6 @@ function FeedbackForm() {
   const onHandleDelete = (id) => {
     deleteFeedback(id)
     navigate('/')
- 
   }
 
   const status = [
@@ -101,9 +101,8 @@ function FeedbackForm() {
   const {title, categoryId, description} = suggestion
   return (
     <div className='sm:container mx-auto p-6 md:px-28 lg:px-56 flex flex-col justify-between'>
-  <Link className='pb-10' to="/"> <img className='inline-block pr-3' src={arrowLeftSvg} alt=""/>
-        go back</Link>
-      <form onSubmit={onSubmitForm} className='bg-white rounded-xl p-4 flex flex-col gap-4'>
+  <Goback color="text-black"/>
+      <form onSubmit={onSubmitForm} className='bg-white rounded-xl p-4 flex flex-col gap-4 mt-4'>
         <div className=' absolute top-16'>
           {suggestion._id ? <img src={ editFeedbackSvg} alt="" /> : <img width="40px" src={ newFeedbackSvg} alt=""/>}
         </div>

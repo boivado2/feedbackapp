@@ -9,6 +9,11 @@ import filteredByStatus from './utils/filteredByStatus'
 
 function FeedPosts() {
   const { getFeedbacks, feedbacks, menuItem, selectedCategory } = useContext(feedbackContext)
+
+  
+  const handleUpvotes = (id, hasVoted) => {
+    console.log(id, hasVoted)
+  }
   useEffect(() => {
     getFeedbacks()
   }, [feedbacks.length])
@@ -25,7 +30,7 @@ function FeedPosts() {
   if(!allSuggestionFeedback) return <p>No Suggestion</p>
   return (
     <div className='p-3 flex flex-col gap-2 sm:p-0'>
-     {sorted.map(feedback => feedback.status === 'suggestion' ? <FeedPost key={feedback._id} feedback={feedback}/>: 'No suggeston Avaliable')}
+     {sorted.map(feedback => feedback.status === 'suggestion' ? <FeedPost onClick={handleUpvotes} key={feedback._id} feedback={feedback}/>: 'No suggeston Avaliable')}
     </div>
   )
 }

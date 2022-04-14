@@ -68,7 +68,6 @@ const FeedbackState = (props) => {
 
   // delete feedback
   const deleteFeedback = async (id) => {
-    console.log(id)
     try {
      await http.delete('http://localhost:1200/api/suggestions/'+ id)
      dispatch({type: DELETE_FEEDBACK, payload:id})
@@ -93,11 +92,14 @@ const FeedbackState = (props) => {
   }
 
     // add comment associated with a give feedback
-    const addComment= async (comment, id) => {
+  const addComment = async (comment, id) => {
+      console.log(id)
       try {
       const {data} =   await http.post(`http://localhost:1200/api/suggestions/${id}/comments`, comment)
        dispatch({type: ADD_COMMENT, payload:data})
-      } catch (ex) { }
+      } catch (ex) {
+        console.log(ex.response)
+       }
   
   }
   

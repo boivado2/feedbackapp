@@ -18,6 +18,7 @@ const FeedbackState = (props) => {
 
   const [state, dispatch] = useReducer(FeedbackReducer, initialState)
 
+  const endPoint = "/suggestion"
   // get feedbacks
   const getFeedbacks = async () => {
     try {

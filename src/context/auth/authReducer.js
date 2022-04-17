@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-import { CLEAR_ERROR, GET_USER, LOGIN_FAIL, LOGIN_USER, LOG_OUT } from "../types";
+import { CLEAR_ERROR, REGISTER_USER, GET_USER, LOGIN_FAIL, REGISTER_FAIL, LOGIN_USER, LOG_OUT } from "../types";
 
 
 
@@ -12,12 +12,23 @@ export default function (state, action) {
         user: action.payload,
         isAuthenticated: true
       }
+    case REGISTER_USER:
+      return {
+        ...state,
+        isAuthenticated:true
+    }
     case LOGIN_USER:
       localStorage.setItem('token', action.payload)
       return {
         ...state,
         isAuthenticated: true
       } 
+    case REGISTER_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        error:action.payload
+      }
     case LOGIN_FAIL: 
       return {
         ...state,

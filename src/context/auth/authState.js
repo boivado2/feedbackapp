@@ -3,7 +3,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import AuthContext from './authContext';
 import AuthReducer from "./authReducer.js"
-import {LOGIN_USER, LOG_OUT, GET_USER, LOGIN_FAIL, CLEAR_ERROR} from '../types'
+import {LOGIN_USER, REGISTER_USER, LOG_OUT, GET_USER, LOGIN_FAIL, CLEAR_ERROR} from '../types'
 
 
 
@@ -24,6 +24,18 @@ function AuthState(props) {
       console.log(user)
     } catch (error) {}
  
+  }
+  const registerUser = async(user) => {
+    try {
+      const response = await axios.post('http://localhost:1200/api/users', user)
+      localStorage.setItem("token", response.headers['x-auth-token'])
+      dispatch({type:REGISTER_USER, payload: response.data})
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        dispatch({type: LOGIN_FAIL, payload: ex.response.data})
+      }
+     
+    }
   }
   
 // login
@@ -58,7 +70,8 @@ function AuthState(props) {
     isAuthenticated: state.isAuthenticated,
       error: state.error,
       loginUser,
-      logOutUser,
+    logOutUser,
+      registerUser,
     getUser,
     clearError
     }} >

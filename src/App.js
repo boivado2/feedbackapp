@@ -8,6 +8,7 @@ import AuthContext from './context/auth/authContext';
 import './App.css';
 import RoadMap from './components/RoadMap';
 import httpService from './services/httpService'
+import RegisterForm from './components/RegisterForm';
 
 if (localStorage.token) {
   httpService.setAuthToken(localStorage.token)
@@ -29,7 +30,9 @@ function App() {
       <Route path='/roadmap' element={<RoadMap/>}/>
 
       <Route path='/feedback/:id' element={<FeedbackForm />} />
-      <Route path='/login' element={<LoginForm/>}/>
+      <Route path='/login' element={<LoginForm />} />
+      <Route path='/register' element={<RegisterForm/>}/>
+
       <Route path='/' element={<Navigate to='/suggestions' replace />}/>
     </Routes>
   )

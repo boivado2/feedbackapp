@@ -60,8 +60,13 @@ function SideBar({ mobileSidebar }) {
         </div>
         {isAuthenticated ? (
                  <button className='w-fit mt-5' onClick={handleLogout}>logout</button>     
-        ): (
-                  <Link className='mt-5 w-fit' to='/login'>Login</Link>      
+        ) : (
+            <div className='inline-block mt-5'>
+              <Link  className='w-fit' to='/login'>Login</Link>  
+              <Link  className='w-fit ml-3' to='/register'>Register</Link> 
+              </div>
+  
+
         )}
       </div>
     </div>

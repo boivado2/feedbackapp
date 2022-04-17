@@ -13,7 +13,7 @@ function FeedPosts() {
   const { menuItem, selectedCategory } = useContext(AppContext)
 
 
-  const allSuggestionFeedback = filteredByStatus(feedbacks, 'suggestion')
+  const allSuggestionFeedback =  filteredByStatus(feedbacks, 'suggestion')
 
   
   const handleUpvotes = (id) => {
@@ -28,13 +28,11 @@ function FeedPosts() {
 
   const filtered = selectedCategory && selectedCategory._id ? allSuggestionFeedback.filter(feedback => feedback.category._id === selectedCategory._id) : allSuggestionFeedback
 
-  const sorted= _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
+  const sorted = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
 
-
-  if (!feedbacks) return <NoFeedback />  
-  if(!allSuggestionFeedback) return <p>No Suggestion</p>
   return (
     <div className='p-3 flex flex-col gap-2 sm:p-0'>
+      {!feedbacks.length &&  <NoFeedback/> }
      {sorted.map(feedback => feedback.status === 'suggestion' ? <FeedPost onClick={handleUpvotes} key={feedback._id} feedback={feedback}/>: 'No suggeston Avaliable')}
     </div>
   )

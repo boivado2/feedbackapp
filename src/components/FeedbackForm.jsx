@@ -124,10 +124,10 @@ function FeedbackForm() {
             value={categoryId} name="categoryId" items={categories} error={errors.categoryId} label="Category" desc="Choose a category for your feedback" />
         </div>
 
-        {suggestion.status &&
+        {suggestion._id &&
   
             <Select items={status}
-              onChange={onHandleChange} name="status" value={suggestion.status} label="Update Status" desc = 'Change Feature State' />
+              onChange={onHandleChange} name="status" value={suggestion.status} label="Update Status" desc = 'Change Feature State' error={errors.status} />
         }
 
       
@@ -137,18 +137,18 @@ function FeedbackForm() {
         {
             suggestion._id
             &&
-            <Btn title="Delete" onClick={() => onHandleDelete(feedback._id)} styles=" bg-f-dark-red hover:bg-f-light-red"/>
+            <Btn title="Delete" onClick={() => onHandleDelete(feedback._id)} styles=" bg-custom-color-red-200 hover:bg-custom-color-red-100"/>
           }
           <div className='flex flex-col my-2 sm:my-0 sm:block'>
             {
               suggestion._id ?
-                (      <Btn title="Save Feedback" styles="bg-f-purple sm:mr-2 my-2 sm:my-0"/>)
+                (      <Btn title="Save Feedback" styles="bg-custom-color-purple sm:mr-2 my-2 sm:my-0"/>)
                   :
                 (
-                <Btn title="Add Feedback" styles="bg-f-purple sm:mr-2 my-2 sm:my-0"/>)
+                <Btn title="Add Feedback" styles="bg-custom-color-purple sm:mr-2 my-2 sm:my-0"/>)
           }
             
-            <Btn title="Cancel" onClick={onHandleCancel} styles=" bg-f-dark-blue-200"/>
+            <Btn title="Cancel" onClick={onHandleCancel} styles=" bg-custom-color-blue-300"/>
       
           </div>
 

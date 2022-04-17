@@ -69,7 +69,7 @@ const FeedbackState = (props) => {
   // delete feedback
   const deleteFeedback = async (id) => {
     try {
-     await http.delete(endPoint+ id)
+     await http.delete(endPoint+ '/' + id)
      dispatch({type: DELETE_FEEDBACK, payload:id})
     } catch (ex) {
       console.log(ex.response)

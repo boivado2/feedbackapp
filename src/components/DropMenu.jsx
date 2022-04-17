@@ -14,7 +14,7 @@ function DropMenu({onMenuSelect, selectedMenuItem, menu, onHideMenu, OnShowMenu}
 
   ]
   return (
-    <div className="relative inline-block text-left z-50">
+    <div className="relative inline-block text-left z-10">
       <div className="inline-flex justify-center w-full  px-2 py-1 text-sm font-medium text-white" id="menu-button">
 
         {!menu ?

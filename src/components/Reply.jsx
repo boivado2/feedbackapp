@@ -66,24 +66,24 @@ function Reply({reply, parentId,  suggestionId}) {
           <div className='flex justify-between'>
           <img className=' w-8 h-8 object-contain rounded-full mr-3' src={reply.user.image_url} alt="image_url" />
             <div>
-            <h4 className=' text-f-dark-blue'>{ reply.user.name}</h4>
-              <p className=' text-f-dark-blue-300 text-xs dark:text-f-dark-blue-300'>{"@"+ reply.user.username}</p>
+            <h4 className=' text-custom-color-blue-400'>{ reply.user.name}</h4>
+              <p className=' text-custom-color-blue-200 text-xs dark:text-custom-color-blue-200'>{"@"+ reply.user.username}</p>
          </div>
           </div>
                  
           <div>
           {form ? (
-            <button onClick={handleHideForm} className=' text-f-purple '>Reply</button>
+            <button onClick={handleHideForm} className=' text-custom-color-blue-100'>Reply</button>
           ) : (
               
-              <button onClick={handleShowForm} className=' text-f-purple '>Reply</button>
+              <button onClick={handleShowForm} className=' text-custom-color-blue-100'>Reply</button>
           )}
       </div>
         </div>
    
-        <p className='mt-3 sm:ml-14 break-all'>
+        <p className='mt-3 text-custom-color-blue-200 sm:ml-14 break-all'>
           {reply.replyingTo
-            && <span className=' mr-3'>{'@'+reply.replyingTo}</span>}
+            && <span className=' mr-3 text-custom-color-purple'>{'@'+reply.replyingTo}</span>}
           {reply.content}
         </p>
           </div>

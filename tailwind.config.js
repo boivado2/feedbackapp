@@ -26,17 +26,16 @@ module.exports = {
 
       },
       colors: {
-        "light-white": '#F7F8FD',
-        "light-white-100": "#F2F4FF",
-        "f-purple": '#AD1FEA',
-        "f-light-blue": '#4661E6',
-        "f-dark-blue" : "#647196",
-        "f-dark-blue-200" :"#3A4374",
-        'f-dark-blue-300': '#373F68',
-        "f-light-red": "#F49F85",
-        "f-dark-red": "#D73737",
-        "custom-color-10": "#62BCFA",
-        "custom-color-11": "#F49F85"
+        "custom-color-white-100": '#F7F8FD',
+        "custom-color-white-200": "#F2F4FF",
+        "custom-color-purple": '#AD1FEA',
+        "custom-color-blue-100": '#4661E6',
+        "custom-color-blue-200" : "#647196",
+        "custom-color-blue-300" :"#3A4374",
+        'custom-color-blue-400': '#373F68',
+        "custom-color-red-100": "#F49F85",
+        "custom-color-red-200": "#D73737",
+        "custom-color-cyan": "#62BCFA",
       }
     },
   },

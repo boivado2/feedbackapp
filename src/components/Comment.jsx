@@ -64,22 +64,22 @@ function Comment({ comment }) {
           <div className='flex items-center'>
           <img className=' w-8 h-8 object-contain rounded-full mr-3' src={comment.user.image_url} alt="image_url" />
             <div>
-            <h4 className=' text-f-dark-blue'>{ comment.user.name}</h4>
-              <p className=' text-f-dark-blue-300 text-xs dark:text-f-dark-blue-300'>{"@"+ comment.user.username}</p>
+            <h4 className=' text-custom-color-blue-400'>{ comment.user.name}</h4>
+              <p className=' text-custom-color-blue-200 text-xs dark:text-custom-color-blue-200'>{"@"+ comment.user.username}</p>
          </div>
           </div>
           <div>
           {form ? (
-            <button onClick={() => setForm(false)} className=' text-f-purple '>Reply</button>
+            <button onClick={() => setForm(false)} className=' text-custom-color-blue-100 '>Reply</button>
           ) : (
               
-              <button onClick={() => setForm(true)} className=' text-f-purple '>Reply</button>
+              <button onClick={() => setForm(true)} className=' text-custom-color-blue-100 '>Reply</button>
         )}
     </div>
         </div>
-                <p className={`mt-3  sm:ml-14 break-all`}>
+                <p className={`mt-3 text-custom-color-blue-200 sm:ml-14 break-all `}>
           {comment.replyingTo
-            && <span className=' mr-3'>{'@'+comment.replyingTo}</span>}
+            && <span className='text-custom-color-purple mr-3'>{'@'+comment.replyingTo}</span>}
           {comment.content}
       </p>
       </div>
@@ -88,7 +88,7 @@ function Comment({ comment }) {
       {form ? (
             <form onSubmit={handleFormSubmit} className='flex gap-2 my-1 flex-col md:flex-row sm:ml-14' >
           <Textarea name="content" value={subComment.content} onChange={onHandleInput} holder="Type your comment here" error={errors.content} styles="md:flex-5" />
-          <Btn title="Post Reply" styles=" bg-f-purple mt-3  lg:px-1 h-fit md:flex-2 w-fit"/>
+          <Btn title="Post Reply" styles=" bg-custom-color-purple mt-3  lg:px-1 h-fit md:flex-2 w-fit"/>
 
           </form>
         ) : ''}

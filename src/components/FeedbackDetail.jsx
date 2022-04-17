@@ -64,7 +64,7 @@ function FeedbackDetail() {
     <div className='lg:container mx-auto px-6 py-10 md:px-24 md:py-10 flex  flex-col  gap-3'>
       <div className='flex justify-between items-center'>
         <Goback color="text-black"/>
-      <Link to={`/feedback/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-f-light-blue'>Edit Feedback</Link>
+      <Link to={`/feedback/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
       </div>
       <FeedPost feedback={feedback} />
       <Comments comments={comments}/>
@@ -73,8 +73,8 @@ function FeedbackDetail() {
         <form onSubmit={onFormSubmit} className="flex flex-col" >
           <Textarea name="content" value={content} onChange={onHandleInput} label="Add Comment" holder = "Type your comment here" error={errors.content} handleTextCount={handleTextCount} />
           <div className='flex justify-between  mt-2'>
-            <span className='text-xs sm:text-base'>{textCharactersLeft} Characters left</span>
-            <Btn title="Post Comment" styles=" bg-f-purple" />
+            <span className='text-xs sm:text-base text-custom-color-blue-200'>{textCharactersLeft} Characters left</span>
+            <Btn title="Post Comment" styles=" bg-custom-color-purple" />
 
         </div>
         </form>

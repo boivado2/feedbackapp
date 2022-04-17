@@ -1,13 +1,15 @@
 import React, {useState, useContext} from 'react'
 import DropMenu from './DropMenu';
 import { Link } from 'react-router-dom';
-import FeedbackContext  from '../context/feeds/feedbackContext'
+import FeedbackContext from '../context/feeds/feedbackContext'
+import AppContext  from '../context/app/appContext'
 import filteredByStatus from './utils/filteredByStatus';
 import checkSvg from '../suggestions/icon-suggestions.svg';
 
 function Header() {
+  const {setMenuItem, menuItem} = useContext(AppContext)
+  const { feedbacks } = useContext(FeedbackContext)
 
-  const{setMenuItem, menuItem, feedbacks} = useContext(FeedbackContext)
   const [menu, setMenu] = useState(false)
 
   const onMenuSelect = (menuItem) => {

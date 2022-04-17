@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { GET_FEEDBACKS, GET_FEEDBACK, SET_MENU_ITEM, GET_CATEGORIES, SET_CATEGORY, ADD_COMMENT, GET_COMMENT, UPDATE_FEEDBACK, DELETE_FEEDBACK } from './../types';
+import { GET_FEEDBACKS, GET_FEEDBACK, GET_CATEGORIES, ADD_COMMENT, GET_COMMENT, UPDATE_FEEDBACK, DELETE_FEEDBACK } from './../types';
 
 
 export default (state, action) => {
@@ -29,11 +29,6 @@ export default (state, action) => {
         ...state,
         categories: action.payload
       }
-    case SET_CATEGORY: 
-      return {
-        ...state,
-        selectedCategory: action.payload
-      }
     case GET_COMMENT: 
       return {
         ...state,
@@ -44,11 +39,7 @@ export default (state, action) => {
         ...state,
         comments: [...state.comments, action.payload]
       }
-    case SET_MENU_ITEM:
-      return {
-        ...state,
-        menuItem: action.payload
-      }
+
         
     default:
       return state;

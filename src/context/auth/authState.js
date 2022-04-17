@@ -21,13 +21,13 @@ function AuthState(props) {
     try {
       const user = await jwtDecode(token)
       dispatch({ type: GET_USER, payload: user })
-      console.log(user)
     } catch (error) {}
  
   }
+  // register
   const registerUser = async(user) => {
     try {
-      const response = await axios.post('http://localhost:1200/api/users', user)
+      const response = await axios.post('/users', user)
       localStorage.setItem("token", response.headers['x-auth-token'])
       dispatch({type:REGISTER_USER, payload: response.data})
     } catch (ex) {
@@ -41,7 +41,7 @@ function AuthState(props) {
 // login
   const loginUser = async (user) => {
     try {
-      const { data } = await axios.post('http://localhost:1200/api/auth', user)
+      const { data } = await axios.post('/auth', user)
       dispatch({type:LOGIN_USER, payload: data})
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

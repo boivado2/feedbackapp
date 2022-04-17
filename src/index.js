@@ -5,15 +5,19 @@ import reportWebVitals from './reportWebVitals';
 import FeedbackState from './context/feeds/feedbackState';
 import {BrowserRouter as Router} from 'react-router-dom'
 import AuthState from './context/auth/authState';
+import AppState from './context/app/appState';
+
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+      <AppState>
       <AuthState>
         <FeedbackState>
-          <App />
+          <Router>
+            <App />
+          </Router>
         </FeedbackState>
         </AuthState>
-     </Router>
+        </AppState>
   </React.StrictMode>,
   document.getElementById('root')
 );

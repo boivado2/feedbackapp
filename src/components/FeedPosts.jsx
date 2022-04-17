@@ -2,13 +2,18 @@
 import React, { useContext, useEffect } from 'react'
 import _ from 'lodash'
 import feedbackContext from '../context/feeds/feedbackContext'
+import AppContext  from '../context/app/appContext'
 import FeedPost from './FeedPost'
 import NoFeedback from './NoFeedback';
 import filteredByStatus from './utils/filteredByStatus'
 
 
 function FeedPosts() {
-  const { getFeedbacks, feedbacks, menuItem, selectedCategory } = useContext(feedbackContext)
+  const { getFeedbacks, feedbacks } = useContext(feedbackContext)
+  const { menuItem, selectedCategory } = useContext(AppContext)
+
+
+  const allSuggestionFeedback = filteredByStatus(feedbacks, 'suggestion')
 
   
   const handleUpvotes = (id) => {
@@ -17,9 +22,8 @@ function FeedPosts() {
   }
   useEffect(() => {
     getFeedbacks()
-  }, [feedbacks.length])
+  }, [allSuggestionFeedback.length])
 
-  const allSuggestionFeedback = filteredByStatus(feedbacks, 'suggestion')
   
 
   const filtered = selectedCategory && selectedCategory._id ? allSuggestionFeedback.filter(feedback => feedback.category._id === selectedCategory._id) : allSuggestionFeedback

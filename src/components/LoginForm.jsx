@@ -63,7 +63,7 @@ function LoginForm() {
   return (
     <div className='sm:container mx-auto px-6  md:px-28  py-32 lg:px-56 flex flex-col justify-between'>
       <Goback color="text-black"/>
-      <form onSubmit={handleSubmit} className='bg-white rounded-xl p-8 flex flex-col gap-4' >
+      <form onSubmit={handleSubmit} className='bg-white mt-3 rounded-xl p-8 flex flex-col gap-4' >
       <h2 className='text-2xl text-center mb-8'>Login</h2>
 
         <Input onChange={handleInputChange} value={username} name='username' type="text" label='Username' error={errors.username} />
@@ -71,7 +71,7 @@ function LoginForm() {
         <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
 
         <Btn title="Login" styles=" bg-f-purple mb-2 w-fit" />
-        <p className=' text-f-purple'>if you dont have an accout <span className=' underline cursor-pointer text-f-dark-blue' onClick={() => navigate('/register')}>register</span></p>
+        <p className=' text-f-dark-blue'>you dont have an accout <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/register')}>register</span></p>
 
       </form>
     </div>

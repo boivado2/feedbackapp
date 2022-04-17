@@ -4,12 +4,14 @@ import { Link, NavLink } from 'react-router-dom';
 import FeedCategory from './FeedCategory'
 import FeedbackContext from './../context/feeds/feedbackContext';
 import AuthContext from './../context/auth/authContext';
+import AppContext  from '../context/app/appContext'
+
+
 
 function SideBar({ mobileSidebar }) {
+  const {setCategory, selectedCategory} =  useContext(AppContext)
   const { isAuthenticated, logOutUser } = useContext(AuthContext)
-
- const {getCategories, categories, setCategory, selectedCategory, feedbacks} =  useContext(FeedbackContext)
-  
+ const {getCategories, categories, feedbacks} =  useContext(FeedbackContext)
 
   useEffect(() => {
     getCategories()
@@ -65,8 +67,6 @@ function SideBar({ mobileSidebar }) {
               <Link  className='w-fit' to='/login'>Login</Link>  
               <Link  className='w-fit ml-3' to='/register'>Register</Link> 
               </div>
-  
-
         )}
       </div>
     </div>

@@ -27,7 +27,7 @@ const navigate = useNavigate()
       window.location = '/'
     }
 
-    if (error === "username already exist") {
+    if (error === "Username already taken!") {
       const newError = { ...errors }
       newError.username = error
       setErrors(newError)
@@ -63,7 +63,7 @@ const navigate = useNavigate()
   return (
     <div className='sm:container mx-auto px-6  md:px-28  py-32 lg:px-56 flex flex-col justify-between'>
       <Goback color="text-black"/>
-      <form onSubmit={handleSubmit} className='bg-white rounded-xl p-8 flex flex-col gap-4' >
+      <form onSubmit={handleSubmit} className='bg-white mt-3 rounded-xl p-8 flex flex-col gap-4' >
       <h2 className='text-2xl text-center mb-8'>Register</h2>
 
       <Input onChange={handleInputChange} value={name} name='name' type="text" label='Name' error={errors.name} />
@@ -74,7 +74,7 @@ const navigate = useNavigate()
 
         <Btn title="Register" styles=" bg-f-purple mb-2 w-fit" />
         
-        <p className=' text-f-purple'>if you already have an accout <span className=' underline cursor-pointer text-f-dark-blue' onClick={() => navigate('/login')}>login</span></p>
+        <p className=' text-f-dark-blue'>you already have an accout <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/login')}>login</span></p>
       </form>
     </div>
   )

@@ -11,8 +11,9 @@ function FeedPosts() {
   const { getFeedbacks, feedbacks, menuItem, selectedCategory } = useContext(feedbackContext)
 
   
-  const handleUpvotes = (id, hasVoted) => {
-    console.log(id, hasVoted)
+  const handleUpvotes = (id) => {
+    alert("feature wiil soon be implemented")
+    
   }
   useEffect(() => {
     getFeedbacks()

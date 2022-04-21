@@ -8,7 +8,6 @@ import Select from './common/Select';
 import validateFormInput from './utils/validateFormInput';
 import Textarea from './common/Textarea';
 import Btn from './common/Btn';
-import arrowLeftSvg from '../shared/icon-arrow-left.svg';
 import newFeedbackSvg from '../shared/icon-new-feedback.svg';
 import editFeedbackSvg from '../shared/icon-edit-feedback.svg';
 import Goback from './common/Goback';
@@ -17,7 +16,7 @@ import Goback from './common/Goback';
 
 function FeedbackForm() {
 
-  const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback } = useContext(FeedbackContext)
+  const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback} = useContext(FeedbackContext)
 
   const navigate = useNavigate()
   const [suggestion, setSuggestion] = useState({
@@ -32,6 +31,9 @@ function FeedbackForm() {
     getCategories()
     if (id === 'new') return
     setSuggestion(mapToViewModel(feedback))
+
+
+
   }, [])
   
   const schema = Joi.object({
@@ -67,7 +69,10 @@ function FeedbackForm() {
         addFeedback(suggestion)
       }
       navigate(-1)
+
     }
+    
+
 
   }
 
@@ -88,7 +93,8 @@ function FeedbackForm() {
 
   const onHandleDelete = (id) => {
     deleteFeedback(id)
-    navigate('/')
+ 
+      navigate(-1)
   }
 
   const status = [

@@ -7,7 +7,6 @@ import arrowupSvg from '../shared/icon-arrow-up.svg';
 function FeedPost({ feedback, onClick }) {
 
   const [hasVoted, setHasVoted] = React.useState(false)
-  console.log(hasVoted)
 
   return (
 
@@ -29,16 +28,16 @@ function FeedPost({ feedback, onClick }) {
           }
         </div>
        
-        <NavLink to={`/suggestions/${feedback._id}`} className='text-lg cursor-pointer text-custom-color-blue-300 w-fit sm:text-xl'>{feedback.title}</NavLink>
+        <NavLink to={`/feedback/${feedback._id}`} className='text-lg cursor-pointer text-custom-color-blue-300 w-fit sm:text-xl'>{feedback.title}</NavLink>
         <p className='text-xs my-2  sm:text-base  text-custom-color-blue-200'> {feedback.description}</p>
-        <span className='p-2 text-sm sm:text-base bg-light-white  rounded-lg w-fit text-custom-color-blue-100 '>{feedback.category.title}</span>
+        <span className='p-2 text-sm sm:text-base bg-light-white  rounded-lg w-fit text-custom-color-blue-100 '>{feedback.category ? feedback.category.title : ""}</span>
       </div>
 
       <span onClick={() => {
         setHasVoted(true)
         onClick(feedback._id, hasVoted)
       }
-      } className={`p-3 text-sm bg-custom-color-white-100 cursor-pointer inline-block absolute left-4 bottom-4 rounded-xl w-fit hover:bg-custom-color-white-100 hover:brightness-90  ${feedback.status === 'suggestion' ? "sm:order-1 sm:mb-0 sm:static" : ""}`}> <img src={arrowupSvg} alt="" /> {feedback.upvotes.length}</span>
+      } className={`p-3 text-sm bg-custom-color-white-100 cursor-pointer inline-block absolute left-4 bottom-4 rounded-xl w-fit hover:bg-custom-color-white-100 hover:brightness-90  ${feedback.status === 'suggestion' ? "sm:order-1 sm:mb-0 sm:static" : ""}`}> <img src={arrowupSvg} alt="" /> {feedback.upvotes ? feedback.upvotes.length : 0}</span>
  
         <span className={`p-3 text-sm inline-flex absolute right-4 bottom-4 rounded-xl w-fit ${feedback.status === 'suggestion' ? "sm:order-3 sm:mb-0 sm:static": ""}`}> <img className='pr-3 ' src={commentSvg} alt="" /> {feedback.commentsLength}</span>
     </div>

@@ -91,7 +91,7 @@ function Reply({reply, parentId,  suggestionId}) {
         {form ? (
             <form onSubmit={handleFormSubmit} className='flex gap-2 my-4 flex-col md:flex-row sm:ml-14' >
           <Textarea name="content" value={subComment.content} onChange={onHandleInput} holder="Type your comment here" error={errors.content} styles="md:flex-5" />
-          <Btn title="Post Reply" styles=" bg-f-purple mt-3  lg:px-1 h-fit md:flex-2 w-fit"/>
+          <Btn title="Post Reply" styles=" bg-custom-color-purple mt-3  lg:px-1 h-fit md:flex-2 w-fit"/>
 
           </form>
         ) : ''}

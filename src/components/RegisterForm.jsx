@@ -7,6 +7,7 @@ import Input from './common/Input';
 import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
 import Goback from './common/Goback';
+import { toast } from 'react-toastify';
 
 function RegisterForm() {
 
@@ -28,9 +29,7 @@ const navigate = useNavigate()
     }
 
     if (error === "Username already taken!") {
-      const newError = { ...errors }
-      newError.username = error
-      setErrors(newError)
+      toast(error)
       clearError()
     }
   },[isAuthenticated, error])
@@ -72,9 +71,9 @@ const navigate = useNavigate()
       
         <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
 
-        <Btn title="Register" styles=" bg-f-purple mb-2 w-fit" />
+        <Btn title="Register" styles=" bg-custom-color-blue-100 mb-2 w-fit" />
         
-        <p className=' text-f-dark-blue'>you already have an accout <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/login')}>login</span></p>
+        <p className=' text-f-dark-blue'>already have an account <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/login')}>login</span></p>
       </form>
     </div>
   )

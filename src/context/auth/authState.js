@@ -10,7 +10,7 @@ import {LOGIN_USER, REGISTER_USER, LOG_OUT, GET_USER, LOGIN_FAIL, CLEAR_ERROR} f
 function AuthState(props) {
 
   const initialState = {
-    user: {},
+    user: null,
     isAuthenticated: false,
     error: {}
   }
@@ -53,7 +53,7 @@ function AuthState(props) {
   }
 
  const clearError = () => {
-    setTimeout(() => dispatch({type: CLEAR_ERROR}), 100)
+    setTimeout(() => dispatch({type: CLEAR_ERROR}), 1000)
   }
 
 

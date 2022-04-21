@@ -1,7 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL
+axios.defaults.baseURL =  process.env.REACT_APP_API_URL
 
 const setAuthToken = (token) => {
   if (token) {
@@ -14,7 +15,7 @@ axios.interceptors.response.use(null, error => {
   const expectdError = error.response && error.response.status >= 400 && error.response.status < 500
 
   if (!expectdError) {
-    console.log("error", error)
+    toast("An unexpected error occurred.")
   }
 
  return Promise.reject(error)

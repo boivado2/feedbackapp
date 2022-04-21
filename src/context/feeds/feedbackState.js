@@ -1,7 +1,7 @@
 import { useReducer } from "react"
 import FeedbackReducer from "./feedbackReducer"
 import FeedbackContext from './feedbackContext';
-import { GET_FEEDBACKS, GET_FEEDBACK,GET_CATEGORIES,ADD_COMMENT, GET_COMMENT, DELETE_FEEDBACK, UPDATE_FEEDBACK } from './../types';
+import { GET_FEEDBACKS, GET_FEEDBACK,GET_CATEGORIES,ADD_COMMENT, GET_COMMENT, DELETE_FEEDBACK, UPDATE_FEEDBACK, GET_FEEDBACK_FAILED, CLEAR_ERROR, UPDATE_FEEDBACK_FAILED, DELETE_FEEDBACK_FAILED } from './../types';
 import http from '../../services/httpService'
 
 
@@ -11,7 +11,9 @@ const FeedbackState = (props) => {
     feedbacks: [],
     categories: [],
     comments: [],
-    feedback: null,
+    feedback: {},
+    loading: true,
+    error: {}
   }
 
   const [state, dispatch] = useReducer(FeedbackReducer, initialState)
@@ -21,12 +23,9 @@ const FeedbackState = (props) => {
   // get feedbacks
   const getFeedbacks = async () => {
     try {
-      const {data} = await http.get(endPoint)
+      const { data } = await http.get(endPoint)
       dispatch({ type: GET_FEEDBACKS, payload:data})
-    } catch (ex) {
-      console.log(ex)
-      
-    }
+    } catch (ex) { }
    
   }
 
@@ -37,7 +36,9 @@ const FeedbackState = (props) => {
      
       dispatch({ type: GET_FEEDBACK, payload: data })
     } catch (ex) {
-      console.log(ex.response)
+      if (ex.response && ex.response.status === 404) {
+        dispatch({type:GET_FEEDBACK_FAILED, payload:ex.response.data})
+      }
     }
    
   }
@@ -60,7 +61,7 @@ const FeedbackState = (props) => {
     const {data} =   await http.put(endPoint + '/' + feedback._id, body)
      dispatch({type: UPDATE_FEEDBACK, payload:data})
     } catch (ex) {
-      console.log(ex.response)
+      dispatch({type:UPDATE_FEEDBACK_FAILED, payload:ex.response.data})
     }
 
   }
@@ -69,10 +70,10 @@ const FeedbackState = (props) => {
   // delete feedback
   const deleteFeedback = async (id) => {
     try {
-     await http.delete(endPoint+ '/' + id)
+     await http.delete(endPoint + '/' + id)
      dispatch({type: DELETE_FEEDBACK, payload:id})
     } catch (ex) {
-      console.log(ex.response)
+      dispatch({type:DELETE_FEEDBACK_FAILED, payload:ex.response.data})
     }
 
   }
@@ -93,7 +94,6 @@ const FeedbackState = (props) => {
 
     // add comment associated with a given feedback
   const addComment = async (comment, id) => {
-      console.log(id)
       try {
       const {data} =   await http.post(`${endPoint}/${id}/comments`, comment)
        dispatch({type: ADD_COMMENT, payload:data})
@@ -114,6 +114,10 @@ const FeedbackState = (props) => {
     
   }
 
+  const clearError = () => {
+    setTimeout(() => dispatch({type: CLEAR_ERROR}), 1000)
+  }
+
 
   
 
@@ -123,6 +127,8 @@ const FeedbackState = (props) => {
       feedback: state.feedback,
       categories: state.categories,
       comments: state.comments,
+      loading: state.loading,
+      error: state.error,
       getFeedbacks,
       getFeedback,
       addFeedback,
@@ -131,6 +137,7 @@ const FeedbackState = (props) => {
       addComment,
       getCategories,
       getComments,
+      clearError,
   }}>
     {props.children}
   </FeedbackContext.Provider>

@@ -7,6 +7,7 @@ import Input from './common/Input';
 import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
 import Goback from './common/Goback';
+import { toast } from 'react-toastify';
 
 function LoginForm() {
 
@@ -29,9 +30,7 @@ function LoginForm() {
     }
 
     if (error === "invalid username or password") {
-      const newError = { ...errors }
-      newError.username = error
-      setErrors(newError)
+      toast(error)
       clearError()
     }
   },[isAuthenticated, error])
@@ -70,8 +69,8 @@ function LoginForm() {
       
         <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
 
-        <Btn title="Login" styles=" bg-f-purple mb-2 w-fit" />
-        <p className=' text-f-dark-blue'>you dont have an accout <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/register')}>register</span></p>
+        <Btn title="Login" styles=" bg-custom-color-purple mb-2 w-fit" />
+        <p className=' text-f-dark-blue'>dont have an account ? <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/register')}>register</span></p>
 
       </form>
     </div>

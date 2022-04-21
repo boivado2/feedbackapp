@@ -37,7 +37,7 @@ function RoadMap() {
       <Goback color="text-white"/>
           <h3>Roadmap</h3>
    </div>
-      <Link to='/feedback/new' className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-purple'>+ Add Feedback</Link>
+      <Link to='/suggestions/new' className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-purple'>+ Add Feedback</Link>
     </div>
 
       <div className='flex justify-around w-full items-center border-b-2 sm:hidden'>

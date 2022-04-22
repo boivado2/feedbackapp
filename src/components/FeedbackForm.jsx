@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useContext, useEffect} from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import  Joi  from 'joi-browser';
 import FeedbackContext from './../context/feeds/feedbackContext';
 import Input from './common/Input';

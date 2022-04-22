@@ -7,12 +7,14 @@ import FeedbackForm from './components/FeedbackForm';
 import FeedbackDetail from './components/FeedbackDetail';
 import LoginForm from './components/LoginForm';
 import AuthContext from './context/auth/authContext';
-import './App.css';
 import RoadMap from './components/RoadMap';
 import httpService from './services/httpService'
 import RegisterForm from './components/RegisterForm';
-import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 
 if (localStorage.token) {
@@ -31,6 +33,7 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
+      <Route path='/' element={<Navigate to='/suggestions' replace />}/>
         <Route path='/suggestions' element={<Home />} />
         <Route path='/suggestions/:id' element={
           <ProtectedRoute user={user}>
@@ -42,7 +45,6 @@ function App() {
         <Route path='/login' element={<LoginForm />} />
         <Route path='/register' element={<RegisterForm/>}/>
 
-        <Route path='/' element={<Navigate to='/suggestions' replace />}/>
         <Route path="*" element={<p>Notfound 404</p>} />
       </Routes>
       </>

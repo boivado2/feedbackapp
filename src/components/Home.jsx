@@ -1,4 +1,4 @@
-import { useContext } from 'react/cjs/react.development';
+import React, { useContext } from 'react';
 import SideBar from '../components/SideBar'
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';

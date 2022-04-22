@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useContext} from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';

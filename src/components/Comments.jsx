@@ -2,7 +2,6 @@ import arrayToTree from 'array-to-tree'
 import Comment from './Comment'
 
 
-
 function Comments({ comments }) {
   
 

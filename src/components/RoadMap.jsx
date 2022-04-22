@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FeedbackContext from './../context/feeds/feedbackContext';
 import FeedPost from './FeedPost';
 import filteredByStatus from './utils/filteredByStatus';

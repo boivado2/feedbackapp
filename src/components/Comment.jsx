@@ -8,8 +8,6 @@ import Btn from './common/Btn';
 import Reply from './Reply';
 
 
-
-
 function Comment({ comment }) {
 
   const { addComment } = useContext(FeedbackContext)

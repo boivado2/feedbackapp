@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useCallback } from 'react'
+import React, { useContext, useEffect } from 'react'
 import _ from 'lodash'
 import { toast } from 'react-toastify'
 import feedbackContext from '../context/feeds/feedbackContext'

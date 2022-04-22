@@ -38,8 +38,6 @@ function App() {
         />
         <Route path='/feedback/:id' element={<FeedbackDetail />} />
         <Route path='/roadmap' element={<RoadMap/>}/>
-
-    
         <Route path='/login' element={<LoginForm />} />
         <Route path='/register' element={<RegisterForm/>}/>
 

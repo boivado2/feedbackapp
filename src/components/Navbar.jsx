@@ -5,7 +5,7 @@ import hamburgerOpenSvg from '../shared/mobile/icon-hamburger.svg'
 function Navbar({mobileSidebar, setMobileSidebar}) {
 
   return (
-    <div className='flex justify-between p-3 bg-radial text-white  h-20 items-center sm:hidden'>
+    <div className='flex justify-between p-3 bg-radial text-white  h-20 items-center sm:hidden z-40  sticky top-0'>
       <div className="">
       <h1 className='text-lg'>Frontend Mentor</h1>
       <h2 className='text-sm'>Feedback Dashboard</h2>

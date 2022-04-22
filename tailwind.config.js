@@ -4,11 +4,12 @@ module.exports = {
   ],
   theme: {
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
+      sm: '570px',
+      md: '878px',
+      lg: '1024px',
       xl: '1440px',
     },
+
 
     fontFamily: {
       'jost': 'Jost, sans-serif'
@@ -36,6 +37,10 @@ module.exports = {
         "custom-color-red-100": "#F49F85",
         "custom-color-red-200": "#D73737",
         "custom-color-cyan": "#62BCFA",
+      },
+
+      height: {
+        "screen/2": "calc(100vh - 73px)"
       }
     },
   },

@@ -106,6 +106,7 @@ function FeedbackForm() {
 
   const {title, categoryId, description} = suggestion
   return (
+    <div className=' bg-custom-color-white-200'>
     <div className='sm:container mx-auto p-6 md:px-28 lg:px-56 flex flex-col justify-between'>
   <Goback color="text-black"/>
       <form onSubmit={onSubmitForm} className='bg-white rounded-xl p-4 flex flex-col gap-4 mt-4'>
@@ -160,7 +161,8 @@ function FeedbackForm() {
 
         </div>
       </form>
-    </div>
+      </div>
+      </div>
   )
 }
 

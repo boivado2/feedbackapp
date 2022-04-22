@@ -33,12 +33,13 @@ function SideBar({ mobileSidebar }) {
   
   
   return (
-    <div className={` absolute  flex sm:transform-none sm:static right-0 sm:left-0  flex-col sm:flex-row md:flex-col gap-4 sm:gap-2 p-9 h-full rounded-sm sm:p-0 bg-custom-color-white-100 sm:bg-inherit sm:w-full  md:flex-2  ${!mobileSidebar ? 'translate-x-72' : 'transform-none'} transition-all ease-linear delay-75 z-20`}> 
+    <div className={` absolute   h-full flex sm:transform-none sm:static right-0 sm:left-0  flex-col sm:flex-row md:flex-col gap-4 sm:gap-2 p-9  rounded-sm sm:p-0 bg-custom-color-white-100 sm:bg-inherit sm:w-full  md:flex-2  ${!mobileSidebar ? 'translate-x-72 ' : 'transform-none h-screen/2 sm:h-full'} transition-all ease-linear delay-75 z-40`}> 
+      
       <div className="hidden bg-radial text-white  rounded-lg sm:flex flex-col  sm:w-full bg-white  items-start justify-end pt-16 pb-4 px-4 text-clip ">
-        <h1 className='text-base'>Frontend Mentor</h1>
-        <h2 className='text-xs'>Feedback Board</h2>
+        <h1 className='text-base md:text-2xl'>Frontend Mentor</h1>
+        <h2 className='text-sm md:text-base'>Feedback Board</h2>
  </div>
-      <div className="w-48 bg-white sm:w-full rounded-lg ">
+      <div className="w-48 flex items-center justify-center bg-white sm:w-full rounded-lg ">
         <FeedCategory onItemSelect={handleCategorySelect} selectedItem={selectedCategory} items={ [{title: "All", _id: ""}, ...categories]}/>
       </div>
       <div className="flex justify-center flex-col  w-48

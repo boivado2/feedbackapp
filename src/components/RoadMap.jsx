@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import FeedbackContext from './../context/feeds/feedbackContext';
 import FeedPost from './FeedPost';
 import filteredByStatus from './utils/filteredByStatus';
-import arrowLeftSvg from '../shared/icon-arrow-left.svg';
 import Goback from './common/Goback';
 
 function RoadMap() {
@@ -15,7 +14,6 @@ function RoadMap() {
   }, [])
 
   const [selectedStatus, setCurrentStatus] = useState({ id: 1, title: "planned" })
-  const navigate = useNavigate()
 
   const status =[
     { id: 1, title: "planned", description:"Ideas prioritized for research" },
@@ -30,9 +28,10 @@ function RoadMap() {
 
 
   return (
-    <div className='md:container md:mx-auto  sm:px-8'>
+    <div className=' h-screen bg-custom-color-white-200 sm:p-9'>
       
-      <div className='p-4 sm:mt-4 bg-custom-color-blue-400 text-white sm:rounded-md flex justify-between items-center'>
+      <div className='md:container   md:mx-auto sm:px-8'>
+      <div className='p-4  w-full bg-custom-color-blue-400 text-white sm:rounded-md flex justify-between items-center'>
       <div className='flex flex-col justify-center items-center '>
       <Goback color="text-white"/>
           <h3>Roadmap</h3>
@@ -49,7 +48,7 @@ function RoadMap() {
       {/* feedbacks */}
       <div className='sm:grid sm:grid-cols-3 sm:gap-4 mt-4 px-9 sm:px-0'>
         {status.map(status => (
-          <div key={status.id} className={` ${selectedStatus.title === status.title ? '': 'hidden sm:block'}`}>
+          <div key={status.id} className={`${selectedStatus.title === status.title ? '': 'hidden sm:block'}`}>
             <div className='mb-4'>
             <p className=' text-base'>{status.title} <span>(
               {filteredByStatus(feedbacks,status.title).length})</span> </p>
@@ -64,6 +63,7 @@ function RoadMap() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   )
 }

@@ -60,7 +60,8 @@ function LoginForm() {
 
   const {username, password} = user
   return (
-    <div className='sm:container mx-auto px-6  md:px-28  py-32 lg:px-56 flex flex-col justify-between'>
+    <div className='bg-custom-color-white-200'>
+    <div className='sm:container mx-auto px-6  md:px-28  py-32 lg:px-56 flex flex-col justify-between '>
       <Goback color="text-black"/>
       <form onSubmit={handleSubmit} className='bg-white mt-3 rounded-xl p-8 flex flex-col gap-4' >
       <h2 className='text-2xl text-center mb-8'>Login</h2>
@@ -73,7 +74,8 @@ function LoginForm() {
         <p className=' text-f-dark-blue'>dont have an account ? <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/register')}>register</span></p>
 
       </form>
-    </div>
+      </div>
+      </div>
   )
 }
 

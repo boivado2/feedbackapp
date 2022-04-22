@@ -30,7 +30,7 @@ function Header() {
   const allSuggestionFeedback = filteredByStatus(feedbacks, 'suggestion')
 
   return (
-    <div className='p-2 bg-custom-color-blue-400 text-white sm:rounded-md flex justify-between'>
+    <div className='p-2 z-10 bg-custom-color-blue-400 text-white sm:rounded-md flex justify-between'>
       <div className='flex justify-center items-center '>
         <p className='hidden sm:flex text-base'>
           <img className='pr-3 h-5' src={checkSvg} alt=""/><span className=' pr-1'>{allSuggestionFeedback.length}</span>  Suggestions</p>

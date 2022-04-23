@@ -35,11 +35,11 @@ function FeedPosts() {
 
   
 
-  if(loading) return <Spinner/>
+  if (loading) return <Spinner />
+  if(sorted.length === 0) return <NoFeedback/>
   
   return (
     <div className='p-3 flex flex-col gap-2 sm:p-0 justify-center items-center'>
-      {!feedbacks.length &&  <NoFeedback/> }
       {sorted.map(feedback => <FeedPost  onClick={handleUpvotes} key={feedback._id} feedback={feedback}/>)}
     </div>
   )

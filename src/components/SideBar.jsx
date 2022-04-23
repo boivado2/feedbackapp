@@ -39,7 +39,7 @@ function SideBar({ mobileSidebar }) {
         <h1 className='text-base md:text-2xl'>Frontend Mentor</h1>
         <h2 className='text-sm md:text-base'>Feedback Board</h2>
  </div>
-      <div className="w-48 flex items-center justify-center bg-white sm:w-full rounded-lg ">
+      <div className="w-48 flex items-start justify-center bg-white sm:w-full rounded-lg ">
         <FeedCategory onItemSelect={handleCategorySelect} selectedItem={selectedCategory} items={ [{title: "All", _id: ""}, ...categories]}/>
       </div>
       <div className="flex justify-center flex-col  w-48

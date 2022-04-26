@@ -32,7 +32,7 @@ function FeedbackDetail() {
       toast.error("suggestion not found")
       clearError()
     }
-  }, [comments.length, error])
+  }, [comments.length, error, id])
 
 
   const handleTextCount = () => {
@@ -70,8 +70,8 @@ function FeedbackDetail() {
   } else {
 
     return (
-      <div className='bg-custom-color-white-200'>
-      <div className='lg:container mx-auto px-6 py-10  md:px-24 md:py-10 flex  flex-col h-screen  gap-3'>
+    
+      <div className='lg:container mx-auto  px-6 py-10  md:px-24 md:py-10 flex  flex-col h-screen  gap-3'>
         <div className='flex justify-between items-center'>
           <Goback color="text-black" />
           <Link to={`/suggestions/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
@@ -88,7 +88,6 @@ function FeedbackDetail() {
 
             </div>
           </form>
-        </div>
         </div>
         </div>
     )

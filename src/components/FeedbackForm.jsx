@@ -94,7 +94,7 @@ function FeedbackForm() {
   const onHandleDelete = (id) => {
     deleteFeedback(id)
  
-      navigate(-1)
+      navigate('/')
   }
 
   const status = [

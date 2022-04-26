@@ -1,12 +1,12 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import _ from 'lodash'
-import { toast } from 'react-toastify'
 import feedbackContext from '../context/feeds/feedbackContext'
 import AppContext  from '../context/app/appContext'
 import FeedPost from './FeedPost'
 import NoFeedback from './NoFeedback';
-import filteredByStatus from './utils/filteredByStatus'
+import getFeedbackByStatus from './utils/getFeedbackByStatus'
 import Spinner from './common/Spinner'
 
 
@@ -15,32 +15,28 @@ function FeedPosts() {
   const { menuItem, selectedCategory } = useContext(AppContext)
 
 
-  const allSuggestionFeedback =  filteredByStatus(feedbacks, 'suggestion')
+  const getSuggestionFeedback = useMemo(() => getFeedbackByStatus(feedbacks, 'suggestion'),[feedbacks])
+
+  const filtered = useMemo(() => selectedCategory && selectedCategory._id ? getSuggestionFeedback.filter(feedback => feedback.category.title === selectedCategory.title) : getSuggestionFeedback,[selectedCategory, getSuggestionFeedback])
+
+
+  const sorted = useMemo(() => _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder]),[filtered, menuItem])
 
   
-  const handleUpvotes = (id) => {
-    toast("feature wiil soon be implemented")
-    
-  }
-
   
   useEffect(() => {
     getFeedbacks()
-
-  }, [allSuggestionFeedback.length])
-
-  const filtered = selectedCategory && selectedCategory._id ? allSuggestionFeedback.filter(feedback => feedback.category._id === selectedCategory._id) : allSuggestionFeedback
-
-  const sorted = _.orderBy(filtered, [menuItem.sortPath], [menuItem.sortOrder])
+  }, [sorted.length])
 
   
-
   if (loading) return <Spinner />
-  if(sorted.length === 0) return <NoFeedback/>
+
+  const suggestionFeedbackLength = getSuggestionFeedback.length
+  const sortedLength = sorted.length
   
   return (
-    <div className='p-3 flex flex-col gap-2 sm:p-0 justify-center items-center'>
-      {sorted.map(feedback => <FeedPost  onClick={handleUpvotes} key={feedback._id} feedback={feedback}/>)}
+    <div className='p-3 flex flex-col gap-2 h-auto sm:p-0 justify-center items-center'>
+      {sortedLength === 0 || suggestionFeedbackLength === 0 ? <NoFeedback suggestionFeedbackLength={suggestionFeedbackLength} /> : sorted.map(feedback => <FeedPost  key={feedback._id} feedback={feedback}/>)}
     </div>
   )
 }

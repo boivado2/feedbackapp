@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import commentSvg from '../shared/icon-comments.svg';
-import arrowupSvg from '../shared/icon-arrow-up.svg';
+import Upvotes from './common/Upvotes';
 
-
-function FeedPost({ feedback}) {
+function FeedPost({ feedback }) {
+  console.log(feedback.upvotes)
 
   return (
 
@@ -31,9 +32,10 @@ function FeedPost({ feedback}) {
         <span className='py-1 px-2 text-sm sm:text-base bg-custom-color-white-200  rounded-lg w-fit text-custom-color-blue-100 '>{feedback.category ? feedback.category.title : ""}</span>
       </div>
 
-      <span className={`p-3 text-sm  bg-custom-color-white-100 cursor-pointer  rounded-xl w-fit hover:bg-custom-color-white-100 hover:brightness-90  ${feedback.status === 'suggestion' ? "sm:order-1 sm:mb-0 inline-block  sm:block" : "inline-block"}`}> <img className={` sm:text-xs   ${feedback.status !== "suggestion" ? 'inline-block mr-3' : " inline-block mr-3 sm:mr-0 sm:block"}`} src={arrowupSvg} alt="" /> {feedback.upvotes ? feedback.upvotes.length : 0}</span>
+   
+      <Upvotes feedback={feedback} />
  
-        <span className={`p-3 absolute right-0 text-sm inline-flex  rounded-xl w-fit ${feedback.status === 'suggestion' ? "sm:order-3 sm:mb-0": ""}`}> <img className='pr-3 ' src={commentSvg} alt="" /> {feedback.commentsLength}</span>
+        <span className={`p-3 absolute  right-0 text-sm inline-flex  rounded-xl w-fit ${feedback.status === 'suggestion' ? "sm:order-3 sm:mb-0 sm:static" : ""}`}> <img className='pr-3 ' src={commentSvg} alt="" /> {feedback.commentsLength}</span>
     </div>
 
   )

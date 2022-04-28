@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useContext,useState} from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -18,21 +17,25 @@ function FeedbackDetail() {
   
   const { id } = useParams()
   const navigate = useNavigate()
-  const { getFeedback, feedback, addComment, getComments, comments, loading, error, clearError } = useContext(FeedbackContext)
+  const { getFeedback, feedback, addComment, loading, error, clearError, clearFeedbackState } = useContext(FeedbackContext)
   
   const [comment, setComment] = useState({content: "",})
   const [textCharactersLeft, setTextCharactersLeft] = useState(250)
   const [errors, setErrors] = useState({})
 
+
   useEffect(() => {
     getFeedback(id)
-    getComments(id)
     if (error === 'suggestion not found' || error === "Invalid Id") {
       navigate('/')
       toast.error("suggestion not found")
       clearError()
     }
-  }, [comments.length, error, id])
+
+    return () => {
+      clearFeedbackState()
+    }
+  }, [error, id])
 
 
   const handleTextCount = () => {
@@ -77,7 +80,7 @@ function FeedbackDetail() {
           <Link to={`/suggestions/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
         </div>
         <FeedPost feedback={feedback} />
-        <Comments comments={comments} />
+        <Comments id={id} />
 
         <div className="flex bg-white flex-col p-5">
           <form onSubmit={onFormSubmit} className="flex flex-col" >

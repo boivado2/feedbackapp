@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import FeedCategory from './FeedCategory'
 import FeedbackContext from './../context/feeds/feedbackContext';
@@ -11,11 +11,8 @@ import AppContext  from '../context/app/appContext'
 function SideBar({ mobileSidebar, me }) {
   const {setCategory, selectedCategory} =  useContext(AppContext)
   const { isAuthenticated, logOutUser } = useContext(AuthContext)
- const {getCategories, categories, feedbacks} =  useContext(FeedbackContext)
+ const {categories, feedbacks, loading} =  useContext(FeedbackContext)
 
-  useEffect(() => {
-    getCategories()
-  }, [])
   
   const handleCategorySelect = (category) => {
     setCategory(category)
@@ -39,8 +36,8 @@ function SideBar({ mobileSidebar, me }) {
         <h1 className='text-base lg:text-2xl'>Frontend Mentor</h1>
         <h2 className='text-sm lg:text-base'>Feedback Board</h2>
  </div>
-      <div className="w-48 flex items-start justify-center bg-white sm:w-full rounded-lg ">
-        <FeedCategory onItemSelect={handleCategorySelect} selectedItem={selectedCategory} items={ [{title: "All", _id: ""}, ...categories]}/>
+      <div className="w-48 bg-white sm:w-full rounded-lg ">
+        <FeedCategory loading={loading} onItemSelect={handleCategorySelect} selectedItem={selectedCategory} items={ [{title: "All", _id: ""}, ...categories]}/>
       </div>
       <div className="flex justify-center flex-col  w-48
         bg-white rounded-lg sm:w-full p-5">
@@ -70,7 +67,7 @@ function SideBar({ mobileSidebar, me }) {
             :
             (<button className='cursor-pointer mt-3 text-left' onClick={handleLogout}>Logout</button>)}
       </div>
-    </div>
+      </div>
   )
 }
 

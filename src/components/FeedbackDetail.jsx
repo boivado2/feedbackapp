@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useContext,useState} from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -68,33 +69,38 @@ function FeedbackDetail() {
   
   const { content } = comment
   
-  if (loading) {
-    return <Spinner />
-  } else {
 
     return (
     
-      <div className='lg:container mx-auto  px-6 py-10  md:px-24 md:py-10 flex  flex-col h-screen  gap-3'>
-        <div className='flex justify-between items-center'>
-          <Goback color="text-black" />
-          <Link to={`/suggestions/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
-        </div>
-        <FeedPost feedback={feedback} />
-        <Comments id={id} />
-
-        <div className="flex bg-white flex-col p-5">
-          <form onSubmit={onFormSubmit} className="flex flex-col" >
-            <Textarea name="content" value={content} onChange={onHandleInput} label="Add Comment" holder="Type your comment here" error={errors.content} handleTextCount={handleTextCount} />
-            <div className='flex justify-between  mt-2'>
-              <span className='text-xs sm:text-base text-custom-color-blue-200'>{textCharactersLeft} Characters left</span>
-              <Btn title="Post Comment" styles=" bg-custom-color-purple" />
-
-            </div>
-          </form>
-        </div>
+      <div className={`lg:container mx-auto  px-6 py-10  md:px-24 md:py-10 flex  flex-col h-screen  gap-3`}>
+        {loading ?
+          <Spinner />
+          :
+          (
+            <>
+           <div className='flex justify-between items-center'>
+           <Goback color="text-black" />
+           <Link to={`/suggestions/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
+         </div>
+         <FeedPost feedback={feedback} />
+         <Comments id={id} />
+ 
+         <div className="flex bg-white flex-col p-5">
+           <form onSubmit={onFormSubmit} className="flex flex-col" >
+             <Textarea name="content" value={content} onChange={onHandleInput} label="Add Comment" holder="Type your comment here" error={errors.content} handleTextCount={handleTextCount} />
+             <div className='flex justify-between  mt-2'>
+               <span className='text-xs sm:text-base text-custom-color-blue-200'>{textCharactersLeft} Characters left</span>
+               <Btn title="Post Comment" styles=" bg-custom-color-purple" />
+ 
+             </div>
+           </form>
+              </div>
+          </>
+          
+        )}
+       
         </div>
     )
-  }
 }
 
 export default FeedbackDetail

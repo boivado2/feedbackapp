@@ -7,12 +7,6 @@ import arrowupSvg from '../../shared/icon-arrow-up.svg';
 function Upvotes({ feedback }) {
   const { user } = useContext(AuthContext)
   const { updateUpvotes } = useContext(FeedbackContext)
-
-
-
-
-   
-
   
   useEffect(() => {
 

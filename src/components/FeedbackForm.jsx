@@ -16,7 +16,8 @@ import Goback from './common/Goback';
 
 function FeedbackForm() {
 
-  const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback} = useContext(FeedbackContext)
+  const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback } = useContext(FeedbackContext)
+  
 
   const navigate = useNavigate()
   const [suggestion, setSuggestion] = useState({
@@ -120,7 +121,7 @@ function FeedbackForm() {
           )
           :
           (
-            <h2 className='text-2xl text-f-dark-blue-300 my-6 dark:text-black'>Editing { `"${feedback.title}"`}</h2>
+            <h2 className='text-2xl text-f-dark-blue-300 my-6 dark:text-black'>Editing { `"${title}"`}</h2>
           )}
 
         <Input value={title} onChange={onHandleChange} name="title" label="Feedback Title" desc='Add a short, descriptive headline' error={errors.title}  />
@@ -144,7 +145,7 @@ function FeedbackForm() {
         {
             suggestion._id
             &&
-            <Btn title="Delete" onClick={() => onHandleDelete(feedback._id)} styles=" bg-custom-color-red-200 hover:bg-custom-color-red-100"/>
+            <Btn title="Delete" onClick={() => onHandleDelete(suggestion._id)} styles=" bg-custom-color-red-200 hover:bg-custom-color-red-100"/>
           }
           <div className='flex flex-col my-2 sm:my-0 sm:block'>
             {

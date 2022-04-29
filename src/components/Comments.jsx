@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useContext} from 'react'
 import arrayToTree from 'array-to-tree'
 import Comment from './Comment'

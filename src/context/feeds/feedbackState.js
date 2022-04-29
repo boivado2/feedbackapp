@@ -71,7 +71,7 @@ const FeedbackState = (props) => {
     try {
       const { data } = await http.patch(endPoint + '/' + id)
       console.log(data)
-      //  dispatch({type: UPDATE_UPVOTES, payload:data})
+       dispatch({type: UPDATE_UPVOTES, payload:data})
     } catch (ex) {
       dispatch({ type: UPDATE_UPVOTES_FAILED, payload: ex.response.data })
     }

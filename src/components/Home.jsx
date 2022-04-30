@@ -33,7 +33,7 @@ function Home() {
    <div className={` font-jost text-sm overflow-x-hidden bg-custom-color-white-200 h-screen   flex flex-col transition-all`}>
      <Navbar setMobileSidebar={setMobileSidebar} mobileSidebar={mobileSidebar} />      
      
-     <div className={`relative  lg:container lg:mx-auto sm:p-9 flex  flex-col md:flex-row sm:gap-3 ${mobileSidebar ? "overflow-y-hidden h-screen" : "h-full"} `}>
+     <div className={`relative  lg:container lg:mx-auto sm:p-9 flex  flex-col md:flex-row sm:gap-3 ${mobileSidebar ? "overflow-y-hidden h-screen sm:overflow-y-visible" : "h-full"} `}>
        
        <div className={`${mobileSidebar && "absolute sm:static sm:h-full top-0 left-0 h-screen/2 w-full z-30  overlay"} sm:hidden `}>
        </div>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useContext} from 'react'
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Home from './components/Home';
 import FeedbackForm from './components/FeedbackForm';
@@ -33,9 +33,8 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
-      <Route path='/' element={<Navigate to='/suggestions' replace />}/>
-        <Route path='/suggestions' element={<Home />} />
-        <Route path='/suggestions/:id' element={
+      <Route path='/' element={<Home/>}/>
+      <Route path='/suggestions/:id' element={
           <ProtectedRoute user={user}>
             <FeedbackForm />
           </ProtectedRoute>}

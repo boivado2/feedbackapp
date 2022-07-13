@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router} from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './app/store'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import FeedbackState from './context/feeds/feedbackState';
-import {BrowserRouter as Router} from 'react-router-dom'
 import AuthState from './context/auth/authState';
 import AppState from './context/app/appState';
+
 
 
 ReactDOM.render(
@@ -13,9 +16,11 @@ ReactDOM.render(
       <AppState>
       <AuthState>
         <FeedbackState>
+          <Provider store={store}>
           <Router>
             <App />
           </Router>
+          </Provider>
         </FeedbackState>
         </AuthState>
         </AppState>

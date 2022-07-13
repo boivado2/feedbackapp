@@ -1,22 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext } from 'react'
+import { useSelector, useDispatch} from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import FeedCategory from './FeedCategory'
 import FeedbackContext from './../context/feeds/feedbackContext';
 import AuthContext from './../context/auth/authContext';
-import AppContext  from '../context/app/appContext'
+import { selectCategory } from '../app/ui';
 
 
 
-function SideBar({ mobileSidebar, me }) {
-  const {setCategory, selectedCategory} =  useContext(AppContext)
+function SideBar() {
   const { isAuthenticated, logOutUser } = useContext(AuthContext)
- const {categories, feedbacks, loading} =  useContext(FeedbackContext)
+  const { categories, feedbacks, loading } = useContext(FeedbackContext)
+  const dispatch = useDispatch()
+  const mobileSidebar = useSelector(state => state.entities.ui.mobileSidebar)
+  const selectedCategory = useSelector(state => state.entities.ui.selectedCategory)
 
-  
-  const handleCategorySelect = (category) => {
-    setCategory(category)
-  }
+
+
 
   const handleLogout = () => {
     logOutUser()
@@ -37,7 +38,7 @@ function SideBar({ mobileSidebar, me }) {
         <h2 className='text-sm lg:text-base'>Feedback Board</h2>
  </div>
       <div className="w-48 bg-white sm:w-full rounded-lg ">
-        <FeedCategory loading={loading} onItemSelect={handleCategorySelect} selectedItem={selectedCategory} items={ [{title: "All", _id: ""}, ...categories]}/>
+        <FeedCategory loading={loading} onItemSelect={(category) => dispatch(selectCategory(category))} selectedItem={selectedCategory} items={ [{title: "All", _id: ""}, ...categories]}/>
       </div>
       <div className="flex justify-center flex-col  w-48
         bg-white rounded-lg sm:w-full p-5">

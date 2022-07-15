@@ -7,13 +7,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import FeedbackState from './context/feeds/feedbackState';
 import AuthState from './context/auth/authState';
-import AppState from './context/app/appState';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-      <AppState>
       <AuthState>
         <FeedbackState>
           <Provider store={store}>
@@ -23,7 +21,6 @@ ReactDOM.render(
           </Provider>
         </FeedbackState>
         </AuthState>
-        </AppState>
   </React.StrictMode>,
   document.getElementById('root')
 );

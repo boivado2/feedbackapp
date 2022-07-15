@@ -11,10 +11,14 @@ import { selectCategory } from '../app/ui';
 
 function SideBar() {
   const { isAuthenticated, logOutUser } = useContext(AuthContext)
-  const { categories, feedbacks, loading } = useContext(FeedbackContext)
+  const {  feedbacks } = useContext(FeedbackContext)
   const dispatch = useDispatch()
-  const mobileSidebar = useSelector(state => state.entities.ui.mobileSidebar)
-  const selectedCategory = useSelector(state => state.entities.ui.selectedCategory)
+  const mobileSidebar = useSelector(state => state.ui.mobileSidebar)
+  const selectedCategory = useSelector(state => state.ui.selectedCategory)
+  const categories = useSelector(state => state.entities.categories.list)
+  const loading = useSelector(state => state.entities.categories.loading)
+
+
 
 
 

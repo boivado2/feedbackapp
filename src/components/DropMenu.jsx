@@ -3,16 +3,16 @@ import checkSvg from '../shared/icon-check.svg'
 import arrowDownSvg from '../shared/icon-arrow-down.svg'
 import arrowUpSvg from '../shared/icon-arrow-up.svg'
 
+const menuList = [
+  { title: "Most Upvotes", id: 1, sortPath: "upvotes.length", sortOrder: "desc"  },
+  { title: "Least Upvotes", id: 2, sortPath: 'upvotes.length', sortOrder: "asc" },
+  { title: "Most Comments", id: 3, sortPath: 'commentsLength', sortOrder: "desc" },
+  { title: "Least Comments", id: 4, sortPath: 'commentsLength', sortOrder: "asc" },
 
+]
 
 function DropMenu({selectMenuItem, selectedMenuItem, menu, onClick }) {
-  const menuList = [
-    { title: "Most Upvotes", id: 1, sortPath: "upvotes.length", sortOrder: "desc"  },
-    { title: "Least Upvotes", id: 2, sortPath: 'upvotes.length', sortOrder: "asc" },
-    { title: "Most Comments", id: 3, sortPath: 'commentsLength', sortOrder: "desc" },
-    { title: "Least Comments", id: 4, sortPath: 'commentsLength', sortOrder: "asc" },
 
-  ]
   return (
     <div className="relative inline-block text-left z-10">
       <div className="inline-flex justify-center w-full  px-2 py-1 text-sm font-medium text-white" id="menu-button">

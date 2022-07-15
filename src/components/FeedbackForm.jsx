@@ -11,15 +11,29 @@ import Btn from './common/Btn';
 import newFeedbackSvg from '../shared/icon-new-feedback.svg';
 import editFeedbackSvg from '../shared/icon-edit-feedback.svg';
 import Goback from './common/Goback';
+import { addFeedback, deleteFeedback, loadFeedback, updateFeedback } from '../app/feedback';
+import { useDispatch } from 'react-redux';
+import { loadcategories } from './../app/categories';
+import { useSelector } from 'react-redux';
+import httpService from '../services/httpService';
 
+
+const status = [
+  "suggestion",
+  "planned",
+  "in-progress",
+  "live"
+]
 
 
 function FeedbackForm() {
-
-  const { addFeedback, getCategories, categories, feedback, updateFeedback, deleteFeedback } = useContext(FeedbackContext)
-  
-
+  const dispatch = useDispatch()
+  const categories = useSelector(state => state.entities.categories.list)
+  const feedback = useSelector(state => state.entities.feedbacks.feedback)
   const navigate = useNavigate()
+  const { id } = useParams()
+
+
   const [suggestion, setSuggestion] = useState({
     title: '',
     categoryId: "",
@@ -27,14 +41,15 @@ function FeedbackForm() {
   })
   const [errors, setErros] = useState({})
   
-  const {id} = useParams()
-  useEffect(() => {
-    getCategories()
+  const populateFeedback =  async() => {
     if (id === 'new') return
-    setSuggestion(mapToViewModel(feedback))
+    const res = await httpService.get(`/suggestions/${id}`)
+    setSuggestion(mapToViewModel(res.data))
+  } 
 
-
-
+  useEffect(() => {
+    dispatch(loadcategories())
+    populateFeedback()
   }, [])
   
   const schema = Joi.object({
@@ -48,12 +63,12 @@ function FeedbackForm() {
   
   const mapToViewModel =  (feedback) => {
     return {
-      _id: feedback._id,
-      title: feedback.title,
-      description: feedback.description,
-      upvotes: feedback.upvotes,
-      status: feedback.status,
-      categoryId: feedback.category._id,
+      _id: feedback?._id,
+      title: feedback?.title,
+      description: feedback?.description,
+      upvotes: feedback?.upvotes,
+      status: feedback?.status,
+      categoryId: feedback?.category?._id,
    }
  }
 
@@ -65,12 +80,11 @@ function FeedbackForm() {
       setErros(errors)
     } else {
       if (suggestion._id) {
-        updateFeedback(suggestion)
+        dispatch(updateFeedback(suggestion))
       } else {
-        addFeedback(suggestion)
+       dispatch(addFeedback(suggestion))
       }
       navigate(-1)
-
     }
     
 
@@ -83,29 +97,24 @@ function FeedbackForm() {
 
   const onHandleCancel = () => {
     navigate(-1)
-    setSuggestion(
-      {
-        title: '',
-        categoryId: "",
-        description: ""
-      }
-    )
+    // setSuggestion(
+    //   {
+    //     title: '',
+    //     categoryId: "",
+    //     description: ""
+    //   }
+    // )
   }
 
   const onHandleDelete = (id) => {
-    deleteFeedback(id)
- 
+    console.log(id)
+    dispatch(deleteFeedback(id))
       navigate('/')
   }
 
-  const status = [
-    "suggestion",
-    "planned",
-    "in-progress",
-    "live"
-  ]
 
-  const {title, categoryId, description} = suggestion
+  const { title, categoryId, description } = suggestion
+  
   return (
     <div className=' bg-custom-color-white-200'>
     <div className='sm:container mx-auto p-6 md:px-28 lg:px-56 flex flex-col justify-between'>
@@ -135,7 +144,7 @@ function FeedbackForm() {
         {suggestion._id &&
   
             <Select items={status}
-              onChange={onHandleChange} name="status" value={suggestion.status} label="Update Status" desc = 'Change Feature State' error={errors.status} />
+              onChange={onHandleChange} name="status" value={suggestion?.status} label="Update Status" desc = 'Change Feature State' error={errors.status} />
         }
 
       
@@ -145,18 +154,20 @@ function FeedbackForm() {
         {
             suggestion._id
             &&
-            <Btn title="Delete" onClick={() => onHandleDelete(suggestion._id)} styles=" bg-custom-color-red-200 hover:bg-custom-color-red-100"/>
+            <Btn title="Delete" onClick={() => onHandleDelete(suggestion?._id)} styles=" bg-custom-color-red-200 hover:bg-custom-color-red-100"/>
           }
           <div className='flex flex-col my-2 sm:my-0 sm:block'>
             {
               suggestion._id ?
-                (      <Btn title="Save Feedback" styles="bg-custom-color-purple sm:mr-2 my-2 sm:my-0"/>)
+                  (
+                    <Btn title="Save Feedback" styles="bg-custom-color-purple sm:mr-2 my-2 sm:my-0" />)
                   :
                 (
-                <Btn title="Add Feedback" styles="bg-custom-color-purple sm:mr-2 my-2 sm:my-0"/>)
+                    <Btn title="Add Feedback" styles="bg-custom-color-purple sm:mr-2 my-2 sm:my-0" />
+                  )
           }
             
-            <Btn title="Cancel" onClick={onHandleCancel} styles=" bg-custom-color-blue-300"/>
+            <Btn  title="Cancel" onClick={onHandleCancel} styles=" bg-custom-color-blue-300"/>
       
           </div>
 

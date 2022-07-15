@@ -6,7 +6,7 @@ import hamburgerOpenSvg from '../shared/mobile/icon-hamburger.svg'
 
 function Navbar() {
   const dispatch = useDispatch()
-  const mobileSidebar = useSelector(state => state.entities.ui.mobileSidebar)
+  const mobileSidebar = useSelector(state => state.ui.mobileSidebar)
 
   return (
     <div className='flex justify-between p-3 bg-radial text-white  h-20 items-center sm:hidden z-40  sticky top-0'>

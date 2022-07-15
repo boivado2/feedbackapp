@@ -6,6 +6,7 @@ const initialState = {
   mobileSidebar: false,
   menu : false,
 }
+
 const slice = createSlice({
   initialState,
   name: "UI",

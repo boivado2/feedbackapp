@@ -11,14 +11,20 @@ import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
 import Goback from './common/Goback';
 import Spinner from './common/Spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import {getSingleFeedback, loadFeedbacks, upvoteFeedback} from '../app/feedback'
 
 
 
 function FeedbackDetail() {
-  
   const { id } = useParams()
+
+  const dispatch = useDispatch()
+  const feedback = useSelector(state => state.entities.feedbacks.feedback)
+  const singleFeedback = useSelector(getSingleFeedback(id))
+  const loading = useSelector(state => state.entities.feedbacks.loading)
   const navigate = useNavigate()
-  const { getFeedback, feedback, addComment, loading, error, clearError, clearFeedbackState } = useContext(FeedbackContext)
+  const { addComment, error, clearError } = useContext(FeedbackContext)
   
   const [comment, setComment] = useState({content: "",})
   const [textCharactersLeft, setTextCharactersLeft] = useState(250)
@@ -26,15 +32,11 @@ function FeedbackDetail() {
 
 
   useEffect(() => {
-    getFeedback(id)
+    dispatch(loadFeedbacks())
     if (error === 'suggestion not found' || error === "Invalid Id") {
       navigate('/')
       toast.error("suggestion not found")
       clearError()
-    }
-
-    return () => {
-      clearFeedbackState()
     }
   }, [error, id])
 
@@ -82,7 +84,7 @@ function FeedbackDetail() {
            <Goback color="text-black" />
            <Link to={`/suggestions/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
          </div>
-         <FeedPost feedback={feedback} />
+              <FeedPost feedback={singleFeedback || feedback} handleUpvote={() => dispatch(upvoteFeedback(singleFeedback._id))} />
          <Comments id={id} />
  
          <div className="flex bg-white flex-col p-5">

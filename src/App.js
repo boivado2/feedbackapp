@@ -13,6 +13,9 @@ import RegisterForm from './components/RegisterForm';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { loadFeedbacks } from './app/feedback';
+import { useSelector } from 'react-redux';
 
 
 

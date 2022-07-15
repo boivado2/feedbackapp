@@ -1,7 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import uiReducer from './ui'
+import categoriesReducer from './categories'
+import feedbackReducer from './feedback'
 
 
 export default combineReducers({
-  ui: uiReducer
+  feedbacks: feedbackReducer,
+  categories:  categoriesReducer
 })

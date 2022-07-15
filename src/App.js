@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useContext} from 'react'
-import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import {  toast, ToastContainer } from 'react-toastify';
 import Home from './components/Home';
 import FeedbackForm from './components/FeedbackForm';
 import FeedbackDetail from './components/FeedbackDetail';
@@ -13,9 +13,8 @@ import RegisterForm from './components/RegisterForm';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
-import { loadFeedbacks } from './app/feedback';
-import { useSelector } from 'react-redux';
+import { clearFeedbackError } from './app/feedback';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -26,11 +25,22 @@ if (localStorage.token) {
 
 
 function App() {
+  const dispatch = useDispatch()
+  const error = useSelector(state => state.entities.feedbacks.error)
+  const navigate = useNavigate()
   const { getUser, user } = useContext(AuthContext)
   useEffect(() => {
+    if (error === "Access denied, no token provided") {
+      toast.error("Please login to perfom such action")
+      setTimeout(() => {
+        navigate('/login')
+        dispatch(clearFeedbackError())
+      }, 3000)
+    }
+
     const token = localStorage.getItem('token')
     getUser(token)
-  }, [])
+  }, [error])
   
   return (
     <>

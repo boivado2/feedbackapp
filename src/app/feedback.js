@@ -23,6 +23,7 @@ const slice = createSlice({
     },
     feedbacksRequestFailed: (state, action) => {
       state.loading = false
+      state.error = action.payload
     },
     feedbacksRecieved: (state, action) => {
       state.list = action.payload
@@ -47,11 +48,15 @@ const slice = createSlice({
     feedbackDeleted: (state, action) => {
       const index = state.list.findIndex(f => f._id === action.payload._id)
       delete state.list[index]
-    }
+    },
+
+    feedbackErrorCleared: (state, action) => {
+      state.error =  {}
+    },
   }
 })
 
-export const { feedbackAdded, feedbacksRecieved, feedbackUpdated, feedbackDeleted, feedbacksReuested, feedbacksRequestFailed, feedbackUpvoted, feedbackRecieved } = slice.actions
+export const { feedbackAdded, feedbacksRecieved, feedbackUpdated, feedbackDeleted, feedbacksReuested, feedbacksRequestFailed, feedbackUpvoted, feedbackRecieved, feedbackErrorCleared } = slice.actions
 
 export default slice.reducer
 
@@ -59,8 +64,7 @@ export default slice.reducer
 
 const url = '/suggestions'
 
-export const loadFeedbacks = () =>
-  apiCallBegan({
+export const loadFeedbacks = () => apiCallBegan({
     url,
     onStart: feedbacksReuested.type,
     onSuccess: feedbacksRecieved.type,
@@ -83,6 +87,7 @@ export const addFeedback = (data)  =>
     onSuccess: feedbackAdded.type,
     data: data,
     method: "POST",
+    onError: feedbacksRequestFailed.type
 
   })
 
@@ -93,7 +98,9 @@ export const updateFeedback = (data) => (dispatch) => {
     url: url + "/" + data._id,
     data: body,
     method: "Put",
-    onSuccess : feedbackUpdated.type
+   onSuccess: feedbackUpdated.type,
+   onError: feedbacksRequestFailed.type
+
  }))
 }
 
@@ -101,19 +108,21 @@ export const upvoteFeedback = (id) => (dispatch) => {
  dispatch(apiCallBegan({
     url: url + "/" + id,
     method: "Patch",
-    onSuccess : feedbackUpvoted.type
+   onSuccess: feedbackUpvoted.type,
+   onError: feedbacksRequestFailed.type
  }))
 }
 
 
 export const deleteFeedback = (id) => (dispatch) => { 
-  console.log(id)
  dispatch(apiCallBegan({
     url: url + "/" + id,
     method: "delete",
     onSuccess : feedbackDeleted.type
  }))
 }
+
+export const clearFeedbackError = () => feedbackErrorCleared()
 
 
 // selectors

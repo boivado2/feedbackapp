@@ -12,7 +12,7 @@ import Btn from './common/Btn';
 import Goback from './common/Goback';
 import Spinner from './common/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import {getSingleFeedback, loadFeedbacks, upvoteFeedback} from '../app/feedback'
+import {getSingleFeedback, loadFeedbacks, upvoteFeedback,loadFeedback} from '../app/feedback'
 
 
 
@@ -23,9 +23,9 @@ function FeedbackDetail() {
   const feedback = useSelector(state => state.entities.feedbacks.feedback)
   const singleFeedback = useSelector(getSingleFeedback(id))
   const loading = useSelector(state => state.entities.feedbacks.loading)
+  const error = useSelector(state => state.entities.feedbacks.error)
   const navigate = useNavigate()
-  const { addComment, error, clearError } = useContext(FeedbackContext)
-  
+  const { addComment, clearError } = useContext(FeedbackContext)
   const [comment, setComment] = useState({content: "",})
   const [textCharactersLeft, setTextCharactersLeft] = useState(250)
   const [errors, setErrors] = useState({})
@@ -33,6 +33,7 @@ function FeedbackDetail() {
 
   useEffect(() => {
     dispatch(loadFeedbacks())
+    dispatch(loadFeedback(id))
     if (error === 'suggestion not found' || error === "Invalid Id") {
       navigate('/')
       toast.error("suggestion not found")

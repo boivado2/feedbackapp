@@ -29,9 +29,9 @@ const api = ({ dispatch }) => (next) => async (action) => {
   
   } catch (error) {
 
-    dispatch(apiCallFailed(error))
+    dispatch(apiCallFailed(error.message))
 
-   if(onError) dispatch({ type: onError, payload: error })
+   if(onError) dispatch({ type: onError, payload: error.response.data })
     
 
   

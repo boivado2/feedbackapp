@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import SideBar from '../components/SideBar'
 import Navbar from '../components/Navbar';
@@ -7,8 +8,9 @@ import Header from '../components/Header';
 import FeedPosts from '../components/FeedPosts';
 import FeedbackContext from './../context/feeds/feedbackContext';
 import { useDispatch } from 'react-redux';
-import { loadFeedbacks } from '../app/feedback';
+import { clearFeedbackError, loadFeedbacks } from '../app/feedback';
 import { loadcategories } from './../app/categories';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -23,6 +25,7 @@ function Home() {
     getCategories()
     dispatch(loadFeedbacks())
     dispatch(loadcategories())
+
 
   }, [])
  

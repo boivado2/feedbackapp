@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState,  useEffect} from 'react'
 import {  useNavigate, useParams } from 'react-router-dom';
 import  Joi  from 'joi-browser';
-import FeedbackContext from './../context/feeds/feedbackContext';
 import Input from './common/Input';
 import Select from './common/Select';
 import validateFormInput from './utils/validateFormInput';
@@ -11,7 +10,7 @@ import Btn from './common/Btn';
 import newFeedbackSvg from '../shared/icon-new-feedback.svg';
 import editFeedbackSvg from '../shared/icon-edit-feedback.svg';
 import Goback from './common/Goback';
-import { addFeedback, deleteFeedback, loadFeedback, updateFeedback } from '../app/feedback';
+import { addFeedback, deleteFeedback, updateFeedback } from '../app/feedback';
 import { useDispatch } from 'react-redux';
 import { loadcategories } from './../app/categories';
 import { useSelector } from 'react-redux';
@@ -29,7 +28,6 @@ const status = [
 function FeedbackForm() {
   const dispatch = useDispatch()
   const categories = useSelector(state => state.entities.categories.list)
-  const feedback = useSelector(state => state.entities.feedbacks.feedback)
   const navigate = useNavigate()
   const { id } = useParams()
 
@@ -97,13 +95,13 @@ function FeedbackForm() {
 
   const onHandleCancel = () => {
     navigate(-1)
-    // setSuggestion(
-    //   {
-    //     title: '',
-    //     categoryId: "",
-    //     description: ""
-    //   }
-    // )
+    setSuggestion(
+      {
+        title: '',
+        categoryId: "",
+        description: ""
+      }
+    )
   }
 
   const onHandleDelete = (id) => {

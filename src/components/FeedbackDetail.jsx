@@ -88,7 +88,7 @@ function FeedbackDetail() {
            <Goback color="text-black" />
            <Link to={`/suggestions/${id}`} className='border-none px-4 py-2 lg:px-5 lg:py-2 text-xs lg:text-sm text-white rounded-md bg-custom-color-blue-100'>Edit Feedback</Link>
          </div>
-              <FeedPost feedback={singleFeedback || feedback} handleUpvote={() => dispatch(upvoteFeedback(singleFeedback._id))} />
+              <FeedPost feedback={singleFeedback || feedback} handleUpvote={() => dispatch(upvoteFeedback(singleFeedback._id))} commentLength={comments?.length} />
          <Comments id={id} />
  
          <div className="flex bg-white flex-col p-5">

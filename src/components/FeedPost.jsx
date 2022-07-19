@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import commentSvg from '../shared/icon-comments.svg';
 import Upvotes from './common/Upvotes';
 
-function FeedPost({ feedback, handleUpvote }) {
+function FeedPost({ feedback, handleUpvote, commentLength }) {
 
   return (
 
@@ -34,7 +34,7 @@ function FeedPost({ feedback, handleUpvote }) {
    
       <Upvotes feedback={feedback} onClick={() => handleUpvote(feedback._id)} />
  
-        <span className={`p-3 absolute  right-0 text-sm inline-flex  rounded-xl w-fit ${feedback.status === 'suggestion' ? "sm:order-3 sm:mb-0 sm:static" : ""}`}> <img className='pr-3 ' src={commentSvg} alt="" /> {feedback.commentsLength}</span>
+        <span className={`p-3 absolute  right-0 text-sm inline-flex  rounded-xl w-fit ${feedback.status === 'suggestion' ? "sm:order-3 sm:mb-0 sm:static" : ""}`}> <img className='pr-3 ' src={commentSvg} alt="" /> {commentLength || feedback.commentsLength}</span>
     </div>
 
   )

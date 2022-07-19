@@ -15,7 +15,6 @@ function LoginForm() {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(state => state.entities.auth.isAuthenticated)
   const error = useSelector(state => state.entities.auth.error)
-  const loading = useSelector(state => state.entities.auth.loading)
 
 
 
@@ -79,7 +78,7 @@ function LoginForm() {
         <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
 
             <Btn title="Login" styles=" bg-custom-color-purple mb-2 w-fit" />
-            
+
         <p className=' text-f-dark-blue'>dont have an account ? <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/register')}>register</span></p>
 
       </form>

@@ -32,7 +32,6 @@ function Reply({ reply, parentId, suggestionId }) {
   const handleFormSubmit = (e) => { 
     e.preventDefault()
 
-    console.log(subComment)
     const errors = validateFormInput(subComment, schema)
     if (errors) {
       setErrors(errors)

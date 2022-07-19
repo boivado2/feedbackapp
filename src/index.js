@@ -5,22 +5,21 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import FeedbackState from './context/feeds/feedbackState';
-import AuthState from './context/auth/authState';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-      <AuthState>
-        <FeedbackState>
-          <Provider store={store}>
-          <Router>
-            <App />
-          </Router>
-          </Provider>
-        </FeedbackState>
-        </AuthState>
+    <Provider store={store}>
+      
+      <Router>
+        
+        <App />
+        
+      </Router>
+      
+    </Provider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

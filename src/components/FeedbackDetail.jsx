@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useContext,useState} from 'react'
+import React, {useEffect,useState} from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Joi from 'joi-browser';
-import FeedbackContext from './../context/feeds/feedbackContext';
 import Comments from './Comments';
 import FeedPost from './FeedPost';
 import Textarea from './common/Textarea';
@@ -12,7 +11,7 @@ import Btn from './common/Btn';
 import Goback from './common/Goback';
 import Spinner from './common/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import {getSingleFeedback, loadFeedbacks, upvoteFeedback,loadFeedback} from '../app/feedback'
+import {getSingleFeedback, loadFeedbacks, upvoteFeedback,loadFeedback, clearFeedbackError} from '../app/feedback'
 import { addComment, loadcomments } from '../app/comments';
 
 
@@ -27,7 +26,6 @@ function FeedbackDetail() {
   const comments = useSelector(state => state.entities.comments.list)
   const error = useSelector(state => state.entities.feedbacks.error)
   const navigate = useNavigate()
-  const { clearError } = useContext(FeedbackContext)
   const [comment, setComment] = useState({content: "",})
   const [textCharactersLeft, setTextCharactersLeft] = useState(250)
   const [errors, setErrors] = useState({})
@@ -40,7 +38,7 @@ function FeedbackDetail() {
     if (error === 'suggestion not found' || error === "Invalid Id") {
       navigate('/')
       toast.error("suggestion not found")
-      clearError()
+      dispatch(clearFeedbackError())
     }
   }, [error, id])
 

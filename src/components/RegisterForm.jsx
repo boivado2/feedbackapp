@@ -1,18 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom'
 import Joi from 'joi-browser'
-import AuthContext from './../context/auth/authContext';
 import Input from './common/Input';
 import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
 import Goback from './common/Goback';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAuthError, registerUser } from '../app/auth';
 
 function RegisterForm() {
-
-  const { registerUser, isAuthenticated, error, clearError } = useContext(AuthContext)
-  
+  const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.entities.auth.isAuthenticated)
+  const error = useSelector(state => state.entities.auth.error)
+    
 const navigate = useNavigate()
   const [user, setUser] = useState({
     name: "",
@@ -30,7 +32,7 @@ const navigate = useNavigate()
 
     if (error === "Username already taken!") {
       toast(error)
-      clearError()
+      dispatch(clearAuthError())
     }
   },[isAuthenticated, error])
 
@@ -49,7 +51,7 @@ const navigate = useNavigate()
     if (errors) {
       setErrors(errors)
     } else {
-      registerUser(user)
+      dispatch(registerUser(user))
       setErrors({})
     }
   }

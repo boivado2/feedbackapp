@@ -1,17 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom'
 import Joi from 'joi-browser'
-import AuthContext from './../context/auth/authContext';
 import Input from './common/Input';
 import validateFormInput from './utils/validateFormInput';
 import Btn from './common/Btn';
 import Goback from './common/Goback';
 import { toast } from 'react-toastify';
+import {loginUser, clearAuthError} from '../app/auth';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginForm() {
 
-  const { loginUser, isAuthenticated, error, clearError } = useContext(AuthContext)
+  const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.entities.auth.isAuthenticated)
+  const error = useSelector(state => state.entities.auth.error)
+  const loading = useSelector(state => state.entities.auth.loading)
+
+
+
+
 
   const navigate = useNavigate()
   
@@ -31,7 +39,7 @@ function LoginForm() {
 
     if (error === "invalid username or password") {
       toast(error)
-      clearError()
+      dispatch(clearAuthError())
     }
   },[isAuthenticated, error])
 
@@ -49,7 +57,7 @@ function LoginForm() {
     if (errors) {
       setErrors(errors)
     } else {
-      loginUser(user)
+      dispatch(loginUser(user))
       setErrors({})
     }
   }
@@ -70,7 +78,8 @@ function LoginForm() {
       
         <Input onChange={handleInputChange} value={password} name='password' type="password" label='Password' error={errors.password} />
 
-        <Btn title="Login" styles=" bg-custom-color-purple mb-2 w-fit" />
+            <Btn title="Login" styles=" bg-custom-color-purple mb-2 w-fit" />
+            
         <p className=' text-f-dark-blue'>dont have an account ? <span className=' underline cursor-pointer text-f-purple' onClick={() => navigate('/register')}>register</span></p>
 
       </form>

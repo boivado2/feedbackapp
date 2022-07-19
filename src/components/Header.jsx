@@ -8,7 +8,7 @@ import { selectMenuItem, toggleMenu } from '../app/ui';
 import getFeedbackByStatus from './utils/getFeedbackByStatus';
 import { getFilteredFeedbacks, getsortedFeedbacks } from '../app/feedback';
 
-function Header({ filterSuggestionLength }) {
+function Header() {
   const dispatch = useDispatch()
 
   const feedbacks = useSelector(state => state.entities.feedbacks.list)

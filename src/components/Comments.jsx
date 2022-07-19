@@ -1,31 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useContext} from 'react'
+import React from 'react'
 import arrayToTree from 'array-to-tree'
 import Comment from './Comment'
-import FeedbackContext from './../context/feeds/feedbackContext';
 import Spinner from './common/Spinner';
+import { useSelector } from 'react-redux';
 
 
-function Comments({ id }) {
-  const { getComments, clearCommentsState, comments, loading } = useContext(FeedbackContext)
-  
-  console.log(id)
-  
+function Comments() {
+  const comments = useSelector(state => state.entities.comments.list)
+  const loading = useSelector(state => state.entities.comments.loading)
 
-  useEffect(() => {
-    getComments(id)
-
-    return () => {
-      clearCommentsState()
-    }
-  }, [id])
 
   const nextedComments =  arrayToTree(comments, {
     parentProperty: 'parentId',
     customID: '_id',
     childrenProperty: 'replies'
   })
-  
   if(loading) return <Spinner/>
   return (
     <div className='px-2 py-1  lg:px-6 lg:py-3 bg-white rounded-md sm:flex flex flex-col  justify-start gap-3 lg:gap-6 '>

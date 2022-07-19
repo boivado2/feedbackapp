@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useContext } from 'react'
-import FeedbackContext from './../context/feeds/feedbackContext';
+import React, { useState } from 'react'
 import  Joi  from 'joi-browser';
 import validateFormInput from './utils/validateFormInput';
 import Textarea from './common/Textarea';
 import Btn from './common/Btn';
 import Reply from './Reply';
+import { useDispatch } from 'react-redux';
+import { addComment } from '../app/comments';
 
 
 function Comment({ comment }) {
-
-  const { addComment } = useContext(FeedbackContext)
+  const dispatch = useDispatch()
 
   const [form, setForm] = useState(false)
 
@@ -39,7 +39,7 @@ function Comment({ comment }) {
     if (errors) {
       setErrors(errors)
     } else {
-      addComment(subComment, comment.suggestionId)
+      dispatch(addComment(subComment, comment.suggestionId))
       setForm(false)
       setErrors({})
     }

@@ -11,9 +11,8 @@ import newFeedbackSvg from '../shared/icon-new-feedback.svg';
 import editFeedbackSvg from '../shared/icon-edit-feedback.svg';
 import Goback from './common/Goback';
 import { addFeedback, deleteFeedback, updateFeedback } from '../app/feedback';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadcategories } from './../app/categories';
-import { useSelector } from 'react-redux';
 import httpService from '../services/httpService';
 
 

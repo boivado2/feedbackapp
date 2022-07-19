@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  menuItem: { title: "Most Upvotes", id: 1, sortPath: 'upvotes', sortOrder: "desc" },
+  menuItem: { title: "Most Upvotes", id: 1, sortPath: 'upvotes.length', sortOrder: "desc" },
   selectedCategory: { title: "All", _id: "" },
   mobileSidebar: false,
   menu : false,

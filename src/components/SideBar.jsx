@@ -1,18 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext } from 'react'
+import React from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import FeedCategory from './FeedCategory'
-import FeedbackContext from './../context/feeds/feedbackContext';
-import AuthContext from './../context/auth/authContext';
 import { selectCategory } from '../app/ui';
-
+import { logOutUser } from '../app/auth';
 
 
 function SideBar() {
-  const { isAuthenticated, logOutUser } = useContext(AuthContext)
-  const {  feedbacks } = useContext(FeedbackContext)
   const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.entities.auth.isAuthenticated)
+  const feedbacks = useSelector(state => state.entities.feedbacks.list)
   const mobileSidebar = useSelector(state => state.ui.mobileSidebar)
   const selectedCategory = useSelector(state => state.ui.selectedCategory)
   const categories = useSelector(state => state.entities.categories.list)
@@ -24,7 +22,7 @@ function SideBar() {
 
 
   const handleLogout = () => {
-    logOutUser()
+    dispatch(logOutUser())
     window.location = '/'
   }
 

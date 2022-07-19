@@ -68,7 +68,6 @@ export const loadFeedbacks = () => apiCallBegan({
     url,
     onStart: feedbacksReuested.type,
     onSuccess: feedbacksRecieved.type,
-    onError: feedbacksRequestFailed.type,
 })
 
 

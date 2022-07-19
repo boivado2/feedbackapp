@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import FeedbackContext from './../context/feeds/feedbackContext';
 import FeedPost from './FeedPost';
 import getFeedbackByStatus from './utils/getFeedbackByStatus';
 import Goback from './common/Goback';
+import { loadFeedbacks, upvoteFeedback } from '../app/feedback';
+import { useDispatch, useSelector } from 'react-redux';
 
 function RoadMap() {
-  const { feedbacks, getFeedbacks } = useContext(FeedbackContext)
+  const dispatch = useDispatch()
+  const feedbacks = useSelector(state => state.entities.feedbacks.list)
   
   useEffect(() => {
-    getFeedbacks()
+    dispatch(loadFeedbacks())
   }, [])
 
   const [selectedStatus, setCurrentStatus] = useState("planned")
@@ -22,6 +24,9 @@ function RoadMap() {
   ]
 
 
+  const handleUpvote = (id) => {
+    dispatch(upvoteFeedback(id))
+  }
 
 
 
@@ -54,7 +59,7 @@ function RoadMap() {
             </div>
               <div className='grid grid-cols-1 gap-2 px-2 sm:px-9 md:px-0 '>
               {getFeedbackByStatus(feedbacks,status.title).map(feedback => (
-                <FeedPost key={feedback._id} feedback=
+                <FeedPost handleUpvote={handleUpvote} key={feedback._id} feedback=
                   {feedback} />
               ))}
         </div>

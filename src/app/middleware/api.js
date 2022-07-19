@@ -1,5 +1,6 @@
 import http from '../../services/httpService'
 import {apiCallBegan, apiCallSuccess} from '../api'
+import { userRegistered } from '../auth';
 import { apiCallFailed } from './../api';
 
 const api = ({ dispatch }) => (next) => async (action) => {
@@ -11,6 +12,7 @@ const api = ({ dispatch }) => (next) => async (action) => {
 
   if(onStart) dispatch({type: onStart})
   
+
   next(action)
 
 
@@ -25,11 +27,16 @@ const api = ({ dispatch }) => (next) => async (action) => {
   
     dispatch(apiCallSuccess(response.data))
 
-    if (onSuccess) dispatch({ type: onSuccess, payload: response.data})
+    if (onSuccess) dispatch({ type: onSuccess, payload: response.data })
+
+    if (onSuccess === userRegistered.type) {
+      console.log(response.headers['x-auth-token'])
+      localStorage.setItem("token", response.headers['x-auth-token'])
+    }
   
   } catch (error) {
 
-    dispatch(apiCallFailed(error.message))
+    dispatch(apiCallFailed(error.response.data))
 
    if(onError) dispatch({ type: onError, payload: error.response.data })
     

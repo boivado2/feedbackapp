@@ -19,6 +19,7 @@ function FeedPosts() {
     dispatch(upvoteFeedback(id))
   }
   
+  
   return (
     <div className='p-3 flex flex-col gap-2 h-auto sm:p-0 justify-center items-center'>
       {loading ?

@@ -12,7 +12,6 @@ const api = ({ dispatch }) => (next) => async (action) => {
 
   if(onStart) dispatch({type: onStart})
   
-
   next(action)
 
 
@@ -29,19 +28,18 @@ const api = ({ dispatch }) => (next) => async (action) => {
 
     if (onSuccess) dispatch({ type: onSuccess, payload: response.data })
 
+
+
     if (onSuccess === userRegistered.type) {
-      console.log(response.headers['x-auth-token'])
       localStorage.setItem("token", response.headers['x-auth-token'])
     }
+
   
   } catch (error) {
-
     dispatch(apiCallFailed(error.response.data))
-
    if(onError) dispatch({ type: onError, payload: error.response.data })
     
 
-  
  }
   
   

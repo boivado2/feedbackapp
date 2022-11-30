@@ -32,9 +32,11 @@ function FeedbackDetail() {
 
 
   useEffect(() => {
-    dispatch(loadFeedbacks())
-    dispatch(loadFeedback(id))
-    dispatch(loadcomments(id))
+    Promise.all([
+      dispatch(loadFeedbacks()),
+      dispatch(loadFeedback(id)),
+      dispatch(loadcomments(id))
+    ])
     if (error === 'suggestion not found' || error === "Invalid Id") {
       navigate('/')
       toast.error("suggestion not found")

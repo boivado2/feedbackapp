@@ -35,6 +35,8 @@ const slice = createSlice({
     },
     feedbackAdded: (state, action) => {
       state.list.push(action.payload)
+      state.loading = false
+
      },
     feedbackUpdated: (state, action) => { 
       const index = state.list.findIndex(f => f._id === action.payload._id)
@@ -83,6 +85,7 @@ export const loadFeedback = (id) =>
 export const addFeedback = (data)  =>
   apiCallBegan({
     url,
+    onStart: feedbacksReuested.type,
     onSuccess: feedbackAdded.type,
     data: data,
     method: "POST",

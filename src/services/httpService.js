@@ -10,8 +10,10 @@ const setAuthToken = (token) => {
   } else {
     delete axios.defaults.headers.common['x-auth-token']
   }
-  }
+}
+  
 axios.interceptors.response.use(null, error => {
+  
   const expectdError = error.response && error.response.status >= 400 && error.response.status < 500
 
   if (!expectdError) {
@@ -20,6 +22,8 @@ axios.interceptors.response.use(null, error => {
 
  return Promise.reject(error)
 })
+
+
 
 export default {
   get: axios.get,

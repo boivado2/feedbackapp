@@ -15,10 +15,11 @@ function Home() {
   const dispatch = useDispatch()
   const mobileSidebar = useSelector(state => state.ui.mobileSidebar)
 
+
   
   useEffect(() => {
-    dispatch(loadFeedbacks())
-    dispatch(loadcategories())
+    Promise.all([dispatch(loadFeedbacks()), dispatch(loadcategories())])
+
   }, [])
  
  return (

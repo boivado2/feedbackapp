@@ -9,11 +9,14 @@ import Goback from './common/Goback';
 import { toast } from 'react-toastify';
 import {loginUser, clearAuthError} from '../app/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import Overlay from './common/Overlay';
+import Spinner from './common/Spinner';
 
 function LoginForm() {
 
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(state => state.entities.auth.isAuthenticated)
+  const loading = useSelector(state => state.entities.auth.loading)
   const error = useSelector(state => state.entities.auth.error)
 
 
@@ -65,8 +68,13 @@ function LoginForm() {
     setUser({...user, [e.target.name]: e.target.value})
   }
 
+
   const {username, password} = user
   return (
+    <>
+      <Overlay visible={loading}>
+          <Spinner/>
+      </Overlay>
     <div className='bg-custom-color-white-200'>
     <div className='sm:container mx-auto px-6  md:px-28  py-32 lg:px-56 flex flex-col justify-between '>
       <Goback color="text-black"/>
@@ -84,6 +92,8 @@ function LoginForm() {
       </form>
       </div>
       </div>
+      </>
+
   )
 }
 

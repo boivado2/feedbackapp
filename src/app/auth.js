@@ -29,7 +29,6 @@ const slice = createSlice({
       state.user = action.payload
     },
     userLogin: (state, action) => {
-      console.log(action.payload)
       localStorage.setItem('token', action.payload)
       state.isAuthenticated = true
       state.loading = false

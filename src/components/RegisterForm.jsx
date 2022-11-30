@@ -9,10 +9,13 @@ import Goback from './common/Goback';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAuthError, registerUser } from '../app/auth';
+import Overlay from './common/Overlay';
+import Spinner from './common/Spinner';
 
 function RegisterForm() {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(state => state.entities.auth.isAuthenticated)
+  const loading = useSelector(state => state.entities.auth.loading)
   const error = useSelector(state => state.entities.auth.error)
     
 const navigate = useNavigate()
@@ -62,8 +65,13 @@ const navigate = useNavigate()
 
   const {username, password, name} = user
   return (
-    <div className='bg-custom-color-white-200'>
+    <>
+       
 
+    <div className='bg-custom-color-white-200 relative h-full overflow-hidden'>
+    <Overlay visible={loading}>
+          <Spinner/>
+      </Overlay>
     <div className='sm:container  mx-auto px-6  md:px-28  py-32 lg:px-56 flex flex-col justify-between'>
       <Goback color="text-black"/>
       <form onSubmit={handleSubmit} className='bg-white mt-3 rounded-xl p-8 flex flex-col gap-4' >
@@ -81,6 +89,7 @@ const navigate = useNavigate()
       </form>
       </div>
       </div>
+      </>
   )
 }
 

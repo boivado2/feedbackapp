@@ -34,7 +34,7 @@ function App() {
   const navigate = useNavigate()
   useEffect(() => {
     if (error === "Access denied, no token provided" || error === "invalid token" ) {
-      toast.error("Please login to perfom such action")
+      toast.error("Please login to perform such action")
       setTimeout(() => {
         navigate('/login')
         dispatch(clearGeneralError())

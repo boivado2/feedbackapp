@@ -13,7 +13,6 @@ import Goback from './common/Goback';
 import { addFeedback, deleteFeedback, getSingleFeedback, updateFeedback } from '../app/feedback';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadcategories } from './../app/categories';
-import httpService from '../services/httpService';
 import Bounce from './common/Bounce';
 
 
@@ -47,7 +46,6 @@ function FeedbackForm() {
   
   const populateFeedback =  async() => {
     if (id === 'new') return
-    // const res = await httpService.get(`/suggestions/${id}`)
     setSuggestion(mapToViewModel(singleFeedback))
   } 
 

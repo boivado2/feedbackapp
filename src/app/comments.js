@@ -35,7 +35,7 @@ export default slice.reducer
 
 // action creators
 
-const url = '/suggestions/'
+const url = '/suggestions'
 
 export const loadcomments = (id) => (dispatch) => {
   dispatch(
